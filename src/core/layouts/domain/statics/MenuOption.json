@@ -1,0 +1,33 @@
+[
+  {
+    "icon": "settings",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Dashboards",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
+        {
+          "icon": "account_tree",
+          "label": "Welcome",
+          "routeName": "WelcomeDashboardPage",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
+        },
+        {
+          "icon": "account_tree",
+          "label": "Dashboard",
+          "routeName": "PrincipalDashboardPage",
+          "permission": "dashboard_store_sales",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
+        }
+      ]
+    }
+  }
+]

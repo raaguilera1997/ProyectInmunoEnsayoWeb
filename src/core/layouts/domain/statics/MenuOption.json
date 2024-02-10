@@ -1,26 +1,35 @@
 [
   {
-    "icon": "settings",
+    "icon": "las la-cog",
     "generalRoute": "dashboard",
     "children": {
-      "title": "Dashboards",
+      "title": "Bienvenido",
       "description": "Graphical representation of the main metrics.",
       "links": [
         {
-          "icon": "account_tree",
-          "label": "Welcome",
+          "icon": "las la-chart-bar",
+          "label": "Gráficos",
           "routeName": "WelcomeDashboardPage",
           "links": [
             {
               "routeName": "DoesNotHave"
             }
           ]
-        },
+        }
+      ]
+    }
+  },
+  {
+    "icon": "las la-users",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Usuarios",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
         {
-          "icon": "account_tree",
-          "label": "Dashboard",
-          "routeName": "PrincipalDashboardPage",
-          "permission": "dashboard_store_sales",
+          "icon": "las la-users",
+          "label": "Usuario",
+          "routeName": "UserPage",
           "links": [
             {
               "routeName": "DoesNotHave"

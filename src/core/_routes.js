@@ -1,5 +1,6 @@
 import ExternalSecurityRoutes from "./modules/external-security/_routes";
 import DashboardRoutes from "./modules/dashboard/_routes";
+import UsuariosRoutes from "./modules/usuarios/_routes";
 export default [
   ...ExternalSecurityRoutes,
   {
@@ -7,6 +8,7 @@ export default [
     component: () => import("./layouts/MainLayout.vue"),
     children: [
       ...DashboardRoutes,
+      ...UsuariosRoutes,
     ]
   },
 

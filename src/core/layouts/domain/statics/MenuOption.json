@@ -1,6 +1,6 @@
 [
   {
-    "icon": "las la-cog",
+    "icon": "las la-chart-line",
     "generalRoute": "dashboard",
     "children": {
       "title": "Bienvenido",
@@ -30,6 +30,26 @@
           "icon": "las la-users",
           "label": "Usuario",
           "routeName": "UserPage",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "icon": "las la-cog",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Nomencladores",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
+        {
+          "icon": "las la-list",
+          "label": "Materia Prima Adquirida",
+          "routeName": "NomMPAdquirida",
           "links": [
             {
               "routeName": "DoesNotHave"

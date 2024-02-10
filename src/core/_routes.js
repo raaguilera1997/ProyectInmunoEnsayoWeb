@@ -1,6 +1,7 @@
 import ExternalSecurityRoutes from "./modules/external-security/_routes";
 import DashboardRoutes from "./modules/dashboard/_routes";
 import UsuariosRoutes from "./modules/usuarios/_routes";
+import NomencladoresRoutes from "./modules/nomencladores/_routes";
 export default [
   ...ExternalSecurityRoutes,
   {
@@ -9,6 +10,7 @@ export default [
     children: [
       ...DashboardRoutes,
       ...UsuariosRoutes,
+      ...NomencladoresRoutes,
     ]
   },
 

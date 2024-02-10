@@ -120,7 +120,7 @@ export default defineComponent({
     <q-drawer
       v-model="drawer"
       show-if-above
-      :width="250"
+      :width="300"
       :breakpoint="700"
       class="hideonprint"
     >

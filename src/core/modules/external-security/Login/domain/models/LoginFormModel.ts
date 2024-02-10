@@ -12,7 +12,7 @@ export default class LoginFormModel {
       maxLength: 255,
       value: "",
       icon: "person",
-      rules: [required,]
+      rules: [required]
     }
     this.password = {
       label: "Contraseña *",

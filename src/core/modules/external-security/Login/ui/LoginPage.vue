@@ -16,6 +16,7 @@
               lazy-rules
               :label="formModel.userName.label"
               v-model="formModel.userName.value"
+              :rules="formModel.userName.rules"
             >
               <template v-slot:prepend>
                 <q-icon

@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosError, AxiosResponse } from "axios";
 import config from "src/infrastructure/config/config";
 import {notify} from "src/infrastructure/services/VisualNotifyService";
 import {Router} from "src/infrastructure/router/index"
+import { useLogin } from 'src/core/composable/useLogin';
 let identityApi: AxiosInstance;
 let boApi: AxiosInstance;
 let boApiUrl = process.env.VUE_CONFIG_API || config.VUE_CONFIG_API;
@@ -44,10 +45,10 @@ const createInstance = (
   if (interceptor) {
     instance.interceptors.request.use(
       (config) => {
-        // const token =useLogin().token
-        // if (token) {
-        //   config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end\
-        // }
+        const token =useLogin().token
+        if (token) {
+          config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end\
+        }
         return config;
       },
       (error) => {

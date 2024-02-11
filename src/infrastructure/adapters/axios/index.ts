@@ -63,39 +63,24 @@ const createInstance = (
       async (err) => {
         const originalConfig = err.config;
         if (originalConfig.url !== "/identity/Login") {
-          // if (err.response) {
-          //   // Access Token was expired
-          //   if (err.response.status == 401 || err.response.status == 403 && !retry&&useLogin().token) {
-          //     retry = true;
-          //     try {
-          //       const d = await useLogin().refreshTokenAction()
-          //       if(d&&d.statusCode == 403){
-          //         const d1 = useLogin().signout()
-          //       }
-          //       return instance(originalConfig);
-          //     } catch (_error) {
-          //       return Promise.reject(_error);
-          //     }
-          //   }
-          //   if(err.response.status==400&&!is_manage){
-          //     notify({
-          //       type:'info',
-          //       content:err.response.data.errors[0]
-          //     })
-          //   }
-          //   if(err.response.status==502||err.response.status==503){
-          //     notify({
-          //       type:'info',
-          //       content:"offline server please check later"
-          //     })
-          //   }
-          // }
-          // else{
-          //   notify({
-          //     type:'warning',
-          //     content:'Please check your internet connection.'
-          //   })
-          // }
+          if (err.response) {
+            // Access Token was expired
+            if (err.response.status == 401 || err.response.status == 403) {
+              useLogin().signOut()
+            }
+            if(err.response.status==502||err.response.status==503){
+              notify({
+                type:'info',
+                content:"offline server please check later"
+              })
+            }
+          }
+          else{
+            notify({
+              type:'warning',
+              content:'Please check your internet connection.'
+            })
+          }
         }
         return Promise.reject(err);
       }

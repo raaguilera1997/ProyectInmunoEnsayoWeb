@@ -17,7 +17,7 @@ function getTimeFromNow(date: Date) {
 }
 
 function getCurrentDateTime(date: string): string {
-  return moment(date).format();
+  return moment(date).format("MM/DD/YYYY");
 }
 
 function getCurrentTime(date: string): string {
@@ -25,13 +25,13 @@ function getCurrentTime(date: string): string {
 }
 
 function getDisplayDateTime(date: string): string {
-  return moment(date).format("YYYY-MM-D  HH:mm");
+  return moment(date).format("YYYY-MM-DD  HH:mm");
 }
 function getDisplayDateTimeOtherFormat(date: string): string {
   return moment(date).format("MM-DD-YYYY HH:mm:ss");
 }
 function getRangeDateTime(date: string): string {
-  return moment(date).format("YYYY/MM/DD");
+  return moment(date).format("MM/DD/YYYY");
 }
 function getRangeDateTimeMonth(date: string): string {
   return moment(date).format("MM/DD/YYYY");

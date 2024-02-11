@@ -20,6 +20,26 @@
     }
   },
   {
+    "icon": "las la-th-list",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Materias Primas",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
+        {
+          "icon": "las la-bars",
+          "label": "Adquiridas",
+          "routeName": "AdquiridasPage",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "icon": "las la-users",
     "generalRoute": "dashboard",
     "children": {

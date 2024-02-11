@@ -1,11 +1,103 @@
 <template>
-    <h1>Holaa</h1>
+  <div class="q-pa-md">
+    <q-table
+      row-key="id"
+      title="Nomenclador Materia Prima Adquirida"
+      :rows="rows"
+      :columns="columns"
+      selection="single"
+      v-model:selected="selected"
+    >
+      <template v-slot:top>
+        <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createNomMatAdquiridaPage'})" />
+        <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editNomMatAdquiridaPage',params:{id:selected[0].id}})"  />
+        <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted"  />
+
+      </template>
+    </q-table>
+  </div>
 </template>
 
 <script>
+  import DeleteDialog from "src/core/dialogs/DeleteDialog";
+  import {
+    API_REST_DELETE_REQUEST,
+    API_REST_GET_REQUEST
+  } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
+  import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
+  import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
+
   export default {
-    name: 'NomencladorMPAdquirida'
-  };
+    name:'NomMPAdquirida',
+    data(){
+      return{
+        columns:[
+          {
+            name: 'id',
+            required: true,
+            label: 'Id',
+            align: 'left',
+            field: row => row.id,
+          },
+          { name: 'name', align: 'center', label: 'Nombre', field: row => row.name},
+        ],
+        rows: [],
+        selected: []
+
+      }
+    },
+    mounted() {
+      this.loadData()
+    },
+    methods:{
+      loadData(){
+        this.$q.loading.show({
+          spinner: QSpinnerFacebook,
+          spinnerColor: 'primary',
+          spinnerSize: 140,
+          backgroundColor: 'white',
+          message: 'Cargando..',
+          messageColor: 'black'
+        })
+        let url='nomenclador/materiaPrimaAdquirida'
+        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
+          this.rows=resp.data
+          this.$q.loading.hide()
+        })
+      },
+      deleted(){
+        this.$q
+          .dialog({
+            // @ts-ignore
+            component: DeleteDialog,
+            componentProps: {
+              // @ts-ignore
+              countsElementsSelected: 1 ,
+            }
+          })
+          .onOk(() => {
+            this.$q.loading.show({
+              spinner: QSpinnerFacebook,
+              spinnerColor: 'primary',
+              spinnerSize: 140,
+              backgroundColor: 'white',
+              message: 'Cargando..',
+              messageColor: 'black'
+            })
+            let url=`nomenclador/materiaPrimaAdquirida/${this.selected[0].id}`
+            API_REST_DELETE_REQUEST({endpoint:url,payload:{}}).then(resp=>{
+              notify({
+                content:'Nomenclador Materia Prima Adquirida eliminado correctamente',
+                type:'positive'
+              })
+              this.selected=[]
+              this.loadData()
+              this.$q.loading.hide()
+            })
+          })
+      }
+    }
+  }
 </script>
 
 <style scoped>

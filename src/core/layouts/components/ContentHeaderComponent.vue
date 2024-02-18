@@ -7,6 +7,10 @@ export default defineComponent({
   name: 'ContentHeader',
   // components: { IconComponent },
   props: {
+    listNotification:{
+      type:Array,
+      required: true,
+    },
     leftMenuState: {
       type: Boolean,
       required: true,
@@ -53,6 +57,12 @@ export default defineComponent({
     Emitir() {
       this.$emit('update:modelValue', false);
     },
+    formatDate(date:any) {
+      var moment = require('moment');
+      var dateString = date;
+      var date = moment.utc(dateString).local();
+      return date.format('DD/MM/YYYY');
+    },
   },
 });
 </script>
@@ -79,6 +89,33 @@ export default defineComponent({
 <!--      <q-btn v-if="$q.screen.gt.sm" color="dark" round flat @click="$q.fullscreen.toggle()">-->
 <!--        <q-icon name="las la-expand-arrows-alt" size="26px" class="q-pt-xs"></q-icon>-->
 <!--      </q-btn>-->
+      <q-btn-dropdown
+        class="q-pt-sm"
+        flat
+        color="dark"
+        icon="notifications"
+      >
+        <template v-slot:label>
+          <q-badge  floating color="red" rounded style="margin-right: 40px" >{{listNotification.length}}</q-badge>
+        </template>
+        <q-list v-for="item in listNotification " :key="item">
+          <q-item >
+            <q-item-section avatar>
+              <q-avatar icon="las la-th-list" color="ap-primary" text-color="white" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-bold">{{item.nomencladorMateriaPrimaAdquirida.name}} ({{item.codigo}})</q-item-label>
+              <q-item-label class="text-bold" caption>{{formatDate(item.dateVencimiento)}}</q-item-label>
+            </q-item-section>
+            <q-item-section side top>
+              <q-item-label class="text-bold" >MPA</q-item-label>
+            </q-item-section>
+
+          </q-item>
+          <q-separator   />
+        </q-list>
+
+      </q-btn-dropdown>
       <q-btn-dropdown
         class="q-pt-sm"
         size="17px"
@@ -136,6 +173,7 @@ export default defineComponent({
             </q-item>
           </q-list>
       </q-btn-dropdown>
+
     </div>
   </q-toolbar>
 

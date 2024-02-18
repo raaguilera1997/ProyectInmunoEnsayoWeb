@@ -6,6 +6,8 @@ import ContentFooterComponent from './components/ContentFooterComponent.vue';
 import ContentHeaderComponent from './components/ContentHeaderComponent.vue';
 import MenuOptionJSON from './domain/statics/MenuOption.json';
 import { useLogin } from 'src/core/composable/useLogin';
+import { API_REST_GET_REQUEST } from 'src/infrastructure/adapters/BoRestApiAdapter';
+import { QSpinnerFacebook } from 'quasar';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -17,8 +19,10 @@ export default defineComponent({
 
   data() {
     const userData= useLogin().user;
+    let listNotification:any=[]
     let drawer: boolean = false;
     return {
+      listNotification,
       drawer,
       leftMenu: {
         state: true,
@@ -29,7 +33,26 @@ export default defineComponent({
       userData,
     };
   },
+  mounted(){
+   this.loadNotification()
+  },
   methods: {
+    loadNotification(){
+      let url=`notificationMateriaPrimaAdquirida`
+      this.$q.loading.show({
+        spinner: QSpinnerFacebook,
+        spinnerColor: 'primary',
+        spinnerSize: 140,
+        backgroundColor: 'white',
+        message: 'Cargando..',
+        messageColor: 'black'
+      })
+      API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
+        this.listNotification=resp.data.result
+        console.log(this.listNotification)
+      })
+      this.$q.loading.hide()
+    },
     showParent(links: any) {
       let result: any = [];
       links.map((item: any) => {
@@ -95,6 +118,7 @@ export default defineComponent({
       <content-header-component
         v-model="drawer"
         :user-data="userData"
+        :listNotification="listNotification"
         @logout="logout"
         :left-menu-state="leftMenu.state"
       >

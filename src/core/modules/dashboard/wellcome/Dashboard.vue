@@ -1,5 +1,5 @@
 <template>
-    <h1>Dashboard</h1>
+  <pie-chart :data="[['Blueberry', 44], ['Strawberry', 23]]"></pie-chart>
 </template>
 
 <script>

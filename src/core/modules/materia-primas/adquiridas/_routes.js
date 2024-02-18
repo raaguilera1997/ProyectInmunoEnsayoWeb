@@ -9,10 +9,10 @@ export default [
   name: "createAdquiridasPage",
   component: () => import("./ui/CreateMateriaPrimaAdquirida")
   },
-  // {
-  // path: "usuario/editar/:id",
-  // name: "editUserPage",
-  // component: () => import("./ui/EditUserPage")
-  // },
+  {
+  path: "adquiridas/editar/:id",
+  name: "editarAdquiridasPage",
+  component: () => import("./ui/EditarMateriaPrimaAdquirida")
+  },
 
 ]

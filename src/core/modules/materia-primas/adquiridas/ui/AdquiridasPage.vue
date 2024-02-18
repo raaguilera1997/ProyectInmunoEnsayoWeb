@@ -19,27 +19,32 @@
       </template>
       <template v-slot:body-cell-dateVencimiento="props">
         <q-td :props="props">
+          <q-badge class="cursor-pointer" :color=compareDate(props.row.dateVencimiento)>
           {{formatDate(props.row.dateVencimiento)}}
+            <q-tooltip>{{compareDate(props.row.dateVencimiento)=='red'?'Vencido':compareDate(props.row.dateVencimiento)=='orange'?'Próximo a vencerse':'En Fecha'}}</q-tooltip>
+          </q-badge>
         </q-td>
       </template>
       <template v-slot:top>
-        <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
+        <q-btn round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit"
-               @click="this.$router.push({name:'editUserPage',params:{id:selected[0].id}})">
+               @click="this.$router.push({name:'editarAdquiridasPage',params:{id:selected[0].id}})">
           <q-tooltip>Editar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted">
           <q-tooltip>Eliminar</q-tooltip>
         </q-btn>
         <q-space />
-        <q-btn flat icon="las la-filter" @click="act_filter_advance=!act_filter_advance" >
+        <q-btn flat icon="las la-filter" @click="act_filter_advance=!act_filter_advance" :disable="pagination_send.payload.search?true:false" >
           <q-tooltip>Filtros Avanzados</q-tooltip>
         </q-btn>
         <q-input
           clearable
-          v-model="search"
+          :readonly="act_filter_advance"
+          v-model="pagination_send.payload.search"
+          @update:model-value="loadData"
           dense
           outlined
           rounded
@@ -181,6 +186,7 @@
           pageSize: 10,
           currentPage: 1,
           payload: {
+            search:null,
             nomencladorMateriaPrimaAdquiridaId: null,
             codigo: null,
             registroEntrada: null,
@@ -193,18 +199,18 @@
       };
     },
     mounted() {
-      this.loadData();
-      this.loadNomenclador()
+       this.loadData();
+       this.loadNomenclador()
     },
     methods: {
       loadNomenclador(){
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
-          spinnerColor: 'primary',
-          spinnerSize: 140,
-          backgroundColor: 'white',
-          message: 'Cargando..',
-          messageColor: 'black'
+            spinnerColor: 'primary',
+            spinnerSize: 140,
+            backgroundColor: 'white',
+            message: 'Cargando..',
+            messageColor: 'black'
         });
         let url='nomenclador/materiaPrimaAdquirida'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
@@ -218,6 +224,29 @@
         this.pagination_send.pageSize = value.rowsPerPage;
         this.pagination_send.currentPage = value.page;
         this.loadData();
+      },
+      compareDate(date){
+        var moment = require('moment');
+        var dateString = date;
+        var date = moment.utc(dateString).local();
+        let newDateVencimiento=new Date(date)
+        let newDateAct=new Date()
+        if(newDateVencimiento>newDateAct){
+          var day_as_milliseconds = 86400000;
+          var diff_in_millisenconds = newDateVencimiento - newDateAct;
+          var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+          let dif=parseInt(Math.round(diff_in_days))
+           if(dif<=3){
+             return 'orange'
+           }
+        }
+        if(newDateAct>newDateVencimiento){
+          return 'red'
+        }
+        else{
+          return 'blue'
+        }
+
       },
       formatDate(date) {
         var moment = require('moment');
@@ -295,10 +324,10 @@
               message: 'Cargando..',
               messageColor: 'black'
             });
-            let url = `users/${this.selected[0].id}`;
+            let url = `materiaPrimasAdquiridas/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
-                content: 'Usuario eliminado correctamente',
+                content: 'Materia Prima Adquirida eliminada correctamente',
                 type: 'positive'
               });
               this.selected = [];

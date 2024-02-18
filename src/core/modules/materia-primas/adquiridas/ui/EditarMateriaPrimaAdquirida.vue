@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md bg-grey-1">
     <q-form @submit="Save" autocomplete="off">
-      <div class="text-subtitle1 text-bold">Crear Materia Prima Adquirida</div>
+      <div class="text-subtitle1 text-bold">Editar Materia Prima Adquirida</div>
       <q-separator/>
       <q-card flat class=" bg-grey-1">
         <q-card-section>
@@ -48,7 +48,11 @@
 </template>
 
 <script>
-  import { API_REST_GET_REQUEST, API_REST_POST_REQUEST } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
+  import {
+    API_REST_GET_REQUEST,
+    API_REST_POST_REQUEST,
+    API_REST_PUT_REQUEST
+  } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
   import { password } from '../../../../../infrastructure/statics/InputsRulesValidation';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
@@ -69,9 +73,37 @@
       };
     },
     mounted(){
+      this.getInfo()
       this.loadNomenclador()
     },
     methods:{
+      formatDate(date) {
+        var moment = require('moment');
+        var dateString = date;
+        var date = moment.utc(dateString).local();
+        return date.format('DD/MM/YYYY');
+      },
+      getInfo(){
+        let url=`materiaPrimasAdquiridas/${this.$route.params.id}`
+        this.$q.loading.show({
+          spinner: QSpinnerFacebook,
+          spinnerColor: 'primary',
+          spinnerSize: 140,
+          backgroundColor: 'white',
+          message: 'Cargando..',
+          messageColor: 'black'
+        })
+        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
+         this.nomencladorAdquirida=resp.data.nomencladorMateriaPrimaAdquirida
+         this.codigo=resp.data.codigo
+         this.registroEntrada=resp.data.registroEntrada
+         this.lote=resp.data.lote
+         this.sizeLote=resp.data.sizeLote
+         this.dateVencimiento=this.formatDate(resp.data.dateVencimiento)
+        })
+        this.$q.loading.hide()
+
+      },
       loadNomenclador(){
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
@@ -96,7 +128,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         })
-        let url = 'materiaPrimasAdquiridas'
+        let url = `materiaPrimasAdquiridas/${this.$route.params.id}`
         let moment = require('moment');
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
@@ -108,10 +140,10 @@
            sizeLote:this.sizeLote,
            dateVencimiento:formattedDate
         }
-           API_REST_POST_REQUEST({ endpoint: url, payload: object }).then(resp => {
+           API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
-                content: 'materia prima adquirida creada correctamente',
+                content: 'materia prima adquirida editada correctamente',
                 type: 'positive'
               })
               this.$q.loading.hide()

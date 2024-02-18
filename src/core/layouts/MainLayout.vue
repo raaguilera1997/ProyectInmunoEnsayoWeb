@@ -8,6 +8,7 @@ import MenuOptionJSON from './domain/statics/MenuOption.json';
 import { useLogin } from 'src/core/composable/useLogin';
 import { API_REST_GET_REQUEST } from 'src/infrastructure/adapters/BoRestApiAdapter';
 import { QSpinnerFacebook } from 'quasar';
+import { useNotification } from 'src/core/composable/useNotification';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -37,7 +38,9 @@ export default defineComponent({
    this.loadNotification()
   },
   methods: {
+
     loadNotification(){
+      let result:any=[]
       let url=`notificationMateriaPrimaAdquirida`
       this.$q.loading.show({
         spinner: QSpinnerFacebook,
@@ -48,8 +51,17 @@ export default defineComponent({
         messageColor: 'black'
       })
       API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-        this.listNotification=resp.data.result
-        console.log(this.listNotification)
+        resp.data.result.map((item:any)=>{
+           let object={
+             ...item,
+             type:'MPA',
+             leido:false
+
+           }
+           result.push(object)
+        })
+        useNotification().setListMpaAdquirida(result)
+        this.listNotification=result
       })
       this.$q.loading.hide()
     },
@@ -103,6 +115,17 @@ export default defineComponent({
       }
       // return true;
     },
+    setLeido(id:any){
+      let result:any=[]
+      this.listNotification.map((item:any)=>{
+        if(item.id==id){
+          item.leido=!item.leido
+        }
+        result.push(item)
+      })
+      useNotification().setListMpaAdquirida(result)
+      this.listNotification=result
+    }
   },
   watch: {
     drawer(value) {
@@ -121,6 +144,7 @@ export default defineComponent({
         :listNotification="listNotification"
         @logout="logout"
         :left-menu-state="leftMenu.state"
+        @Check="setLeido"
       >
         <template v-slot:section_logo>
           <div class="row  q-gutter-md">
@@ -225,7 +249,7 @@ export default defineComponent({
       </q-scroll-area>
     </q-drawer>
     <q-page-container>
-      <div class="q-px-sm">
+      <div>
         <router-view v-slot="{ Component }">
           <transition name="slide-fade">
             <component :is="Component" />

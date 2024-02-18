@@ -133,7 +133,7 @@
 
 })
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
   .login-page {
     background-color: $ap-primary-light;
     background-image: url("~assets/images/logo_short.svg");

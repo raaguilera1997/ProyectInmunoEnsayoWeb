@@ -1,5 +1,6 @@
 <template>
-  <pie-chart :data="[['Blueberry', 44], ['Strawberry', 23]]"></pie-chart>
+      <q-page  class="login-page">
+      </q-page>
 </template>
 
 <script>
@@ -10,6 +11,12 @@
   }
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  .login-page {
+    background-color: #DFFFFC;
+    background-image: url("~assets/images/logo_large.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
 </style>

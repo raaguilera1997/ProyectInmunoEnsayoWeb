@@ -63,6 +63,9 @@ export default defineComponent({
       var date = moment.utc(dateString).local();
       return date.format('DD/MM/YYYY');
     },
+    check(item:any){
+      this.$emit('Check',item.id);
+    }
   },
 });
 </script>
@@ -99,16 +102,19 @@ export default defineComponent({
           <q-badge  floating color="red" rounded style="margin-right: 40px" >{{listNotification.length}}</q-badge>
         </template>
         <q-list v-for="item in listNotification " :key="item">
-          <q-item >
+          <q-item v-ripple clickable  :class="item.leido?'bg-grey-5':''" @click="check(item)">
             <q-item-section avatar>
               <q-avatar icon="las la-th-list" color="ap-primary" text-color="white" />
             </q-item-section>
-            <q-item-section>
+            <q-item-section >
               <q-item-label class="text-bold">{{item.nomencladorMateriaPrimaAdquirida.name}} ({{item.codigo}})</q-item-label>
               <q-item-label class="text-bold" caption>{{formatDate(item.dateVencimiento)}}</q-item-label>
             </q-item-section>
             <q-item-section side top>
-              <q-item-label class="text-bold" >MPA</q-item-label>
+              <q-item-label class="text-bold" >{{item.type}}</q-item-label>
+              <q-icon :name="item.leido?'las la-eye':'las la-eye-slash'" color="dark" >
+                <q-tooltip>{{item.leido?'Marcar como no leido' :'Marcar como leido'}}</q-tooltip>
+              </q-icon>
             </q-item-section>
 
           </q-item>

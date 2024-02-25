@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
 export interface NotificationInterface {
-  listMpaAdquirida: any
+  listMpaAdquirida: any,
+  cant: number,
 }
 export const notification = defineStore('notification', {
   state: (): NotificationInterface => {
     return {
-      listMpaAdquirida: []
+      listMpaAdquirida: [],
+      cant:0
     };
   },
   getters: {
@@ -17,6 +19,9 @@ export const notification = defineStore('notification', {
   actions: {
     setListMpaAdquirida(list:any) {
       this.listMpaAdquirida = list
+    },
+    setCant(cant:number){
+      this.cant = cant
     }
   },
   persist: {

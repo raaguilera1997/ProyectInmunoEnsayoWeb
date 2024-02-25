@@ -1,16 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import IconComponent from 'src/core/components/brand/IconComponent.vue';
-// import Gravatar from 'src/core/Login/gravatar/GravatarLogo.vue';
-// import ChangePasswordDialog from 'src/core/modules/external-security/change-password/ui/Login/ChangePasswordDialog.vue';
+import { useNotification } from 'src/core/composable/useNotification';
 export default defineComponent({
   name: 'ContentHeader',
   // components: { IconComponent },
   props: {
-    listNotification:{
-      type:Array,
-      required: true,
-    },
     leftMenuState: {
       type: Boolean,
       required: true,
@@ -23,6 +17,19 @@ export default defineComponent({
     },
   },
   computed: {
+    cantNotif(){
+      let cant:number=0
+      this.listNotification.map((item:any)=>{
+         if(!item.leido){
+           cant++;
+         }
+      })
+      useNotification().setCant(cant)
+      return   useNotification().cant;
+    },
+    listNotification(){
+      return useNotification().listMpaAdquirida
+    },
     menuState: {
       get: function (): boolean {
         // @ts-ignore
@@ -63,9 +70,17 @@ export default defineComponent({
       var date = moment.utc(dateString).local();
       return date.format('DD/MM/YYYY');
     },
-    check(item:any){
-      this.$emit('Check',item.id);
-    }
+    check(element:any){
+      let result:any=[]
+      this.listNotification.map((item:any)=>{
+        if(item.id==element.id){
+          item.leido=!element.leido
+        }
+        result.push(item)
+      })
+      useNotification().setListMpaAdquirida(result)
+    },
+
   },
 });
 </script>
@@ -99,7 +114,7 @@ export default defineComponent({
         icon="notifications"
       >
         <template v-slot:label>
-          <q-badge  floating color="red" rounded style="margin-right: 40px" >{{listNotification.length}}</q-badge>
+          <q-badge  floating color="red" rounded style="margin-right: 40px" >{{cantNotif}}</q-badge>
         </template>
         <q-list v-for="item in listNotification " :key="item">
           <q-item v-ripple clickable  :class="item.leido?'bg-grey-5':''" @click="check(item)">

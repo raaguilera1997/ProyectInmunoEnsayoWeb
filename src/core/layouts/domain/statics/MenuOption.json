@@ -8,7 +8,7 @@
       "links": [
         {
           "icon": "las la-chart-bar",
-          "label": "Gráficos",
+          "label": "Bienvenido",
           "routeName": "WelcomeDashboardPage",
           "links": [
             {

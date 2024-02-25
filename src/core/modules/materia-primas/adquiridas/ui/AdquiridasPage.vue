@@ -26,14 +26,14 @@
         </q-td>
       </template>
       <template v-slot:top>
-        <q-btn round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
+        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
-        <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit"
+        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"
                @click="this.$router.push({name:'editarAdquiridasPage',params:{id:selected[0].id}})">
           <q-tooltip>Editar</q-tooltip>
         </q-btn>
-        <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted">
+        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted">
           <q-tooltip>Eliminar</q-tooltip>
         </q-btn>
         <q-space />
@@ -136,6 +136,7 @@
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
   import { toUtcDateTime } from '../../../../../infrastructure/services/DateTimeServices';
+  import { useLogin } from '../../../../composable/useLogin';
 
   export default {
     name: 'AdquiridasPage',
@@ -144,6 +145,7 @@
     },
     data() {
       return {
+        userData: useLogin().user,
         search:'',
         nomencladorAdquirida: null,
         codigo: null,

@@ -57,6 +57,7 @@
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
   import { getCurrentDateTime, toUtcDateTime } from '../../../../../infrastructure/services/DateTimeServices';
+  import { useNotification } from '../../../../composable/useNotification';
 
   export default {
     name: 'CreateMPAdquiridas',
@@ -147,6 +148,7 @@
                 type: 'positive'
               })
               this.$q.loading.hide()
+              this.loadNotification()
               this.$router.push({ name: 'AdquiridasPage' })
             }
           }).catch(err => {
@@ -156,7 +158,32 @@
             })
             this.$q.loading.hide()
           })
-        }
+        },
+      loadNotification(){
+        let result=[]
+        let url=`notificationMateriaPrimaAdquirida`
+        this.$q.loading.show({
+          spinner: QSpinnerFacebook,
+          spinnerColor: 'primary',
+          spinnerSize: 140,
+          backgroundColor: 'white',
+          message: 'Cargando..',
+          messageColor: 'black'
+        })
+        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
+          resp.data.result.map((item)=>{
+            let object={
+              ...item,
+              type:'MPA',
+              leido:false
+
+            }
+            result.push(object)
+          })
+          useNotification().setListMpaAdquirida(result)
+        })
+        this.$q.loading.hide()
+      },
       }
 
   };

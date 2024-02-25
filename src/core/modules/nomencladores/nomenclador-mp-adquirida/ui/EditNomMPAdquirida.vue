@@ -29,6 +29,7 @@
   import { password } from '../../../../../infrastructure/statics/InputsRulesValidation';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
+  import { useNotification } from '../../../../composable/useNotification';
 
   export default {
     name: 'EditMPAdquiridaPage',
@@ -86,7 +87,7 @@
           })
           this.$q.loading.hide()
         })
-      }
+      },
     }
   };
 </script>

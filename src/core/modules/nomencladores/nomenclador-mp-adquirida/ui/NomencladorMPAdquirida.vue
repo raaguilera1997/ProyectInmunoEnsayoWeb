@@ -9,9 +9,9 @@
       v-model:selected="selected"
     >
       <template v-slot:top>
-        <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createNomMatAdquiridaPage'})" />
-        <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editNomMatAdquiridaPage',params:{id:selected[0].id}})"  />
-        <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted"  />
+        <q-btn v-if="userData.role!='Consultor'" round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createNomMatAdquiridaPage'})" />
+        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editNomMatAdquiridaPage',params:{id:selected[0].id}})"  />
+        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted"  />
 
       </template>
     </q-table>
@@ -26,11 +26,13 @@
   } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
+  import { useLogin } from '../../../../composable/useLogin';
 
   export default {
     name:'NomMPAdquirida',
     data(){
       return{
+        userData: useLogin().user,
         columns:[
           {
             name: 'id',

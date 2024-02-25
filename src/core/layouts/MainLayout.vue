@@ -115,17 +115,6 @@ export default defineComponent({
       }
       // return true;
     },
-    setLeido(id:any){
-      let result:any=[]
-      this.listNotification.map((item:any)=>{
-        if(item.id==id){
-          item.leido=!item.leido
-        }
-        result.push(item)
-      })
-      useNotification().setListMpaAdquirida(result)
-      this.listNotification=result
-    }
   },
   watch: {
     drawer(value) {
@@ -180,28 +169,12 @@ export default defineComponent({
             class="q-py-none"
             :key="indexOption"
           >
-            <q-item
-              clickable
-              v-ripple
-              class="q-pa-lg text-ap-primary"
-              :active="$route.path.includes(option.generalRoute)"
-              v-if="option.children.links.length == 0"
-            >
-              <q-item-section avatar>
-                <div class="row full-width justify-center">
-                  <q-icon :name="option.icon" size="22px"></q-icon>
-                </div>
-              </q-item-section>
-              <q-item-section>
-                {{ option.children.title }}
-              </q-item-section>
-            </q-item>
             <q-expansion-item
               group="expansionGroup"
               expand-separator
               :caption="option.children.description"
               v-show="showParent(option.children.links)"
-              v-else
+              v-if="userData.role!='Administrador' &&option.children.title!='Usuarios' || userData.role=='Administrador'"
               class="q-mt-sm text-ap-secondary-dark"
               exact
               active-class="text-ap-primary"

@@ -7,7 +7,7 @@
         <q-card-section>
           <div class="row">
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-select dense outlined v-model="nomencladorAdquirida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *" :rules="[val => !!val || 'El campo es requerido']" />
+              <q-select dense outlined v-model="nomencladorProducida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *" :rules="[val => !!val || 'El campo es requerido']" />
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Código *" v-model="codigo" :rules="[val => !!val || 'El campo es requerido']"></q-input>
@@ -43,7 +43,7 @@
         </q-card-section>
       </q-card>
       <div class="fixed-bottom-right">
-        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
+        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'ProducidasPage'})" ></q-btn>
         <q-btn class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
       </div>
     </q-form>
@@ -66,7 +66,7 @@
     name: 'EditarMPProducidas',
     data() {
       return {
-        nomencladorAdquirida: '',
+        nomencladorProducida: '',
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
@@ -89,7 +89,7 @@
         return date.format('DD/MM/YYYY');
       },
       getInfo(){
-        let url=`materiaPrimasAdquiridas/${this.$route.params.id}`
+        let url=`materiaPrimasProducidas/${this.$route.params.id}`
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
           spinnerColor: 'primary',
@@ -99,7 +99,7 @@
           messageColor: 'black'
         })
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-         this.nomencladorAdquirida=resp.data.nomencladorMateriaPrimaAdquirida
+         this.nomencladorProducida=resp.data.nomencladorMateriaPrimaProducidaId
          this.codigo=resp.data.codigo
          this.registroEntrada=resp.data.registroEntrada
          this.lote=resp.data.lote
@@ -139,7 +139,7 @@
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
-          nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
+          nomencladorMateriaPrimaProducidaId: this.nomencladorProducida.id,
            codigo:this.codigo,
            registroEntrada:this.registroEntrada,
            lote:this.lote,

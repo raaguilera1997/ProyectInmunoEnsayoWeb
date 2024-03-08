@@ -7,7 +7,7 @@
         <q-card-section>
           <div class="row">
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-select dense outlined v-model="nomencladorAdquirida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *" :rules="[val => !!val || 'El campo es requerido']" />
+              <q-select dense outlined v-model="nomencladorMateriaPrimaProducidaId" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *" :rules="[val => !!val || 'El campo es requerido']" />
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Código *" v-model="codigo" :rules="[val => !!val || 'El campo es requerido']"></q-input>
@@ -62,7 +62,7 @@
     name: 'CreateMPProducidas',
     data() {
       return {
-        nomencladorAdquirida: '',
+        nomencladorMateriaPrimaProducidaId: '',
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
@@ -105,7 +105,7 @@
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
-          nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
+          nomencladorMateriaPrimaProducidaId: this.nomencladorMateriaPrimaProducidaId.id,
            codigo:this.codigo,
            registroEntrada:this.registroEntrada,
            lote:this.lote,

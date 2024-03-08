@@ -134,7 +134,7 @@
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
-          nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
+           nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
            codigo:this.codigo,
            registroEntrada:this.registroEntrada,
            lote:this.lote,

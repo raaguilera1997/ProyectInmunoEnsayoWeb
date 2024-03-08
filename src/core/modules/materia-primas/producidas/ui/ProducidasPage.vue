@@ -4,7 +4,7 @@
     <q-table
       row-key="id"
       v-model:pagination="pagination"
-      title="Materias Primas Adquiridas"
+      title="Materias Primas Producidas"
       :rows="rows"
       :columns="columns"
       selection="single"
@@ -12,9 +12,9 @@
       @request="request"
 
     >
-      <template v-slot:body-cell-nomencladorMateriaPrimaAdquirida="props">
+      <template v-slot:body-cell-nomencladorMateriaPrimaProducida="props">
         <q-td :props="props">
-          {{props.row.nomencladorMateriaPrimaAdquirida.name}}
+          {{props.row.nomencladorMateriaPrimaProducida.name}}
         </q-td>
       </template>
       <template v-slot:body-cell-dateVencimiento="props">
@@ -78,7 +78,7 @@
                 <div>
                    <div class="row">
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
-                       <q-select dense outlined v-model="nomencladorAdquirida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
+                       <q-select dense outlined v-model="nomencladorProducida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-input dense outlined label="Código *" v-model="codigo" ></q-input>
@@ -147,7 +147,7 @@
       return {
         userData: useLogin().user,
         search:'',
-        nomencladorAdquirida: null,
+        nomencladorProducida: null,
         codigo: null,
         registroEntrada: null,
         lote: null,
@@ -157,11 +157,11 @@
         act_filter_advance:false,
         columns: [
           {
-            name: 'nomencladorMateriaPrimaAdquirida',
+            name: 'nomencladorMateriaPrimaProducida',
             required: true,
             label: 'Nombre',
             align: 'center',
-            field: row => row.nomencladorMateriaPrimaAdquirida
+            field: row => row.nomencladorMateriaPrimaProducida
           },
           {
             name: 'codigo',
@@ -190,7 +190,7 @@
           currentPage: 1,
           payload: {
             search:null,
-            nomencladorMateriaPrimaAdquiridaId: null,
+            nomencladorMateriaPrimaProducidaId: null,
             codigo: null,
             registroEntrada: null,
             lote: null,
@@ -234,15 +234,15 @@
         var date = moment.utc(dateString).local();
         let newDateVencimiento=new Date(date)
         let newDateAct=new Date()
-        if(newDateVencimiento>newDateAct){
-          var day_as_milliseconds = 86400000;
-          var diff_in_millisenconds = newDateVencimiento - newDateAct;
-          var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
-          let dif=parseInt(Math.round(diff_in_days))
-           if(dif<=30){
-             return 'orange'
-           }
-        }
+        // if(newDateVencimiento>newDateAct){
+        //   var day_as_milliseconds = 86400000;
+        //   var diff_in_millisenconds = newDateVencimiento - newDateAct;
+        //   var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
+        //   let dif=parseInt(Math.round(diff_in_days))
+        //    if(dif<=30){
+        //      return 'orange'
+        //    }
+        // }
         if(newDateAct>newDateVencimiento){
           return 'red'
         }
@@ -281,7 +281,7 @@
         });
       },
       applyFilter(){
-        this.pagination_send.payload.nomencladorMateriaPrimaAdquiridaId=this.nomencladorAdquirida?this.nomencladorAdquirida.id:null
+        this.pagination_send.payload.nomencladorMateriaPrimaProducidaId=this.nomencladorMateriaPrimaProducidaId?this.nomencladorMateriaPrimaProducidaId.id:null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote
@@ -296,13 +296,13 @@
         this.loadData()
       },
       clearFilter(){
-        this.nomencladorAdquirida=null
+        this.nomencladorProducida=null
         this.codigo=null
         this.registroEntrada=null
         this.lote=null
         this.sizeLote=null
         this.dateVencimiento=null
-        this.pagination_send.payload.nomencladorMateriaPrimaAdquiridaId=null
+        this.pagination_send.payload.nomencladorMateriaPrimaProducidaId=null
         this.pagination_send.payload.codigo=null
         this.pagination_send.payload.registroEntrada=null
         this.pagination_send.payload.lote=null

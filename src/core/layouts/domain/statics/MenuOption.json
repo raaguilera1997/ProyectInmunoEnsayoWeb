@@ -95,6 +95,16 @@
               "routeName": "DoesNotHave"
             }
           ]
+        },
+        {
+          "icon": "las la-ellipsis-h",
+          "label": "Componentes",
+          "routeName": "NomComponentes",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
         }
       ]
     }

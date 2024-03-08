@@ -99,7 +99,7 @@
           messageColor: 'black'
         })
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-         this.nomencladorProducida=resp.data.nomencladorMateriaPrimaProducidaId
+         this.nomencladorProducida=resp.data.nomencladorMateriaPrimaProducida
          this.codigo=resp.data.codigo
          this.registroEntrada=resp.data.registroEntrada
          this.lote=resp.data.lote
@@ -144,6 +144,7 @@
            registroEntrada:this.registroEntrada,
            lote:this.lote,
            sizeLote:this.sizeLote,
+          unidadMedida:this.unidadMedida,
            dateVencimiento:formattedDate
         }
            API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {

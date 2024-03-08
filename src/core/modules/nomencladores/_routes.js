@@ -1,5 +1,6 @@
 import NomencladorMPAdquiridaRoutes from "./nomenclador-mp-adquirida/_routes"
 import NomencladorMPProducidaRoutes from "./nomenclador-mp-producida/_routes"
+import NomencladorSolucionesAditivasRoutes from "./nomenclador-soluciones-aditivas/_routes"
 export default [
   {
     path: "nomencladores",
@@ -7,6 +8,7 @@ export default [
     children: [
       ...NomencladorMPAdquiridaRoutes,
       ...NomencladorMPProducidaRoutes,
+      ...NomencladorSolucionesAditivasRoutes,
     ]
   }
 ]

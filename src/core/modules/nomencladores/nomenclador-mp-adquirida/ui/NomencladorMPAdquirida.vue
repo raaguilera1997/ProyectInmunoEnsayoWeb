@@ -123,7 +123,7 @@
             let url=`nomenclador/materiaPrimaAdquirida/${this.selected[0].id}`
             API_REST_DELETE_REQUEST({endpoint:url,payload:{}}).then(resp=>{
               notify({
-                content:'Nomenclador Materia Prima Adquirida eliminado correctamente',
+                content:'Nomenclador eliminado correctamente',
                 type:'positive'
               })
               this.selected=[]

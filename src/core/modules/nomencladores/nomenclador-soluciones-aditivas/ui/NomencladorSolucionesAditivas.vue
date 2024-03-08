@@ -30,7 +30,7 @@
   import { useLogin } from '../../../../composable/useLogin';
 
   export default {
-    name:'NomMPProducida',
+    name:'NomSolucionesAditivas',
     data(){
       return{
         userData: useLogin().user,
@@ -60,9 +60,9 @@
             component: NomDialog,
             componentProps: {
               // @ts-ignore
-              nameMat: 'Materia Prima Producida' ,
+              nameMat: 'Soluciones aditivas' ,
               id:0,
-              url:'nomenclador/materiaPrimaProducida',
+              url:'nomenclador/solucionAditiva',
             }
           }) .onOk(() => {
           this.selected=[]
@@ -76,10 +76,10 @@
             component: NomDialog,
             componentProps: {
               // @ts-ignore
-              nameMat: 'Materia Prima Producida' ,
+              nameMat: 'Soluciones aditivas' ,
               nameNom:name,
               id:id,
-              url:'nomenclador/materiaPrimaProducida',
+              url:'nomenclador/solucionAditiva',
             }
           }) .onOk(() => {
           this.selected=[]
@@ -95,7 +95,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         })
-        let url='nomenclador/materiaPrimaProducida'
+        let url='nomenclador/solucionAditiva'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.rows=resp.data
           this.$q.loading.hide()
@@ -120,7 +120,7 @@
               message: 'Cargando..',
               messageColor: 'black'
             })
-            let url=`nomenclador/materiaPrimaProducida/${this.selected[0].id}`
+            let url=`nomenclador/solucionAditiva/${this.selected[0].id}`
             API_REST_DELETE_REQUEST({endpoint:url,payload:{}}).then(resp=>{
               notify({
                 content:'Nomenclador eliminado correctamente',

@@ -85,6 +85,16 @@
               "routeName": "DoesNotHave"
             }
           ]
+        },
+        {
+          "icon": "las la-bars",
+          "label": "Soluciones Aditivas",
+          "routeName": "NomSolucionesAditivas",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
         }
       ]
     }

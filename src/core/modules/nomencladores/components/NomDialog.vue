@@ -58,7 +58,7 @@
           API_REST_POST_REQUEST({ endpoint: urlSend, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
-                content: 'Nomenclador  creado correctamente',
+                content: 'Nomenclador creado correctamente',
                 type: 'positive'
               });
               this.$q.loading.hide();
@@ -77,7 +77,7 @@
           API_REST_PUT_REQUEST({ endpoint: urlSend, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
-                content: 'Nomenclador Materia Prima Adquirida editada correctamente',
+                content: 'Nomenclador  editado correctamente',
                 type: 'positive'
               })
               this.$q.loading.hide();

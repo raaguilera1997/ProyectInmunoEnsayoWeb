@@ -112,7 +112,7 @@
            API_REST_POST_REQUEST({ endpoint: url, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
-                content: 'materia prima adquirida creada correctamente',
+                content: 'materia prima  creada correctamente',
                 type: 'positive'
               })
               this.$q.loading.hide()

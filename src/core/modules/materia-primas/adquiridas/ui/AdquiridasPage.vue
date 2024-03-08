@@ -329,7 +329,7 @@
             let url = `materiaPrimasAdquiridas/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
-                content: 'Materia Prima Adquirida eliminada correctamente',
+                content: 'Materia Prima  eliminada correctamente',
                 type: 'positive'
               });
               this.selected = [];

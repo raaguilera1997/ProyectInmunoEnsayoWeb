@@ -26,11 +26,11 @@
         </q-td>
       </template>
       <template v-slot:top>
-        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
+        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createProducidasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"
-               @click="this.$router.push({name:'editarAdquiridasPage',params:{id:selected[0].id}})">
+               @click="this.$router.push({name:'editarProducidasPage',params:{id:selected[0].id}})">
           <q-tooltip>Editar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted">
@@ -173,6 +173,7 @@
           { name: 'registroEntrada', align: 'center', label: 'Registro de Entrada', field: row => row.registroEntrada },
           { name: 'lote', align: 'center', label: 'Lote', field: row => row.lote },
           { name: 'sizeLote', align: 'center', label: 'Tamaño del lote', field: row => row.sizeLote },
+          { name: 'unidadMedida', align: 'center', label: 'Unidad de Medida', field: row => row.unidadMedida },
           {
             name: 'dateVencimiento',
             align: 'center',
@@ -214,7 +215,7 @@
             message: 'Cargando..',
             messageColor: 'black'
         });
-        let url='nomenclador/materiaPrimaAdquirida'
+        let url='nomenclador/materiaPrimaProducida'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.optionsNomenclator=resp.data
         })
@@ -265,7 +266,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url = 'materiaPrimasAdquiridas/PageData';
+        let url = 'materiaPrimasProducidas/PageData';
         API_REST_POST_REQUEST({ endpoint: url, payload: this.pagination_send }).then(resp => {
           this.rows = resp.data.data;
           this.pagination = {
@@ -326,10 +327,10 @@
               message: 'Cargando..',
               messageColor: 'black'
             });
-            let url = `materiaPrimasAdquiridas/${this.selected[0].id}`;
+            let url = `materiaPrimasProducidas/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
-                content: 'Materia Prima Adquirida eliminada correctamente',
+                content: 'Materia Prima eliminada correctamente',
                 type: 'positive'
               });
               this.selected = [];

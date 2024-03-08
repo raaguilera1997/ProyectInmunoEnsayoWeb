@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md bg-grey-1">
     <q-form @submit="Save" autocomplete="off">
-      <div class="text-subtitle1 text-bold">Editar Materia Prima Adquirida</div>
+      <div class="text-subtitle1 text-bold">Editar Materia Prima Producidas</div>
       <q-separator/>
       <q-card flat class=" bg-grey-1">
         <q-card-section>
@@ -20,6 +20,9 @@
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+            </div>
+            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
+              <q-input dense outlined label="Unidad de Medida *" v-model="unidadMedida" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
@@ -67,6 +70,7 @@
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
+        unidadMedida: '',
         lote: '',
         sizeLote: 0,
         dateVencimiento: null,
@@ -100,6 +104,7 @@
          this.registroEntrada=resp.data.registroEntrada
          this.lote=resp.data.lote
          this.sizeLote=resp.data.sizeLote
+         this.unidadMedida=resp.data.unidadMedida
          this.dateVencimiento=this.formatDate(resp.data.dateVencimiento)
         })
         this.$q.loading.hide()
@@ -114,7 +119,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url='nomenclador/materiaPrimaAdquirida'
+        let url='nomenclador/materiaPrimaProducida'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.optionsNomenclator=resp.data
         })
@@ -129,7 +134,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         })
-        let url = `materiaPrimasAdquiridas/${this.$route.params.id}`
+        let url = `materiaPrimasProducidas/${this.$route.params.id}`
         let moment = require('moment');
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
@@ -144,12 +149,12 @@
            API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
-                content: 'materia prima adquirida editada correctamente',
+                content: 'materia prima editada correctamente',
                 type: 'positive'
               })
               this.$q.loading.hide()
-              this.loadNotification()
-              this.$router.push({ name: 'AdquiridasPage' })
+              // this.loadNotification()
+              this.$router.push({ name: 'ProducidasPage' })
             }
           }).catch(err => {
             notify({

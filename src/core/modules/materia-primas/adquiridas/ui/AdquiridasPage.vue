@@ -238,7 +238,7 @@
           var diff_in_millisenconds = newDateVencimiento - newDateAct;
           var diff_in_days = diff_in_millisenconds / day_as_milliseconds;
           let dif=parseInt(Math.round(diff_in_days))
-           if(dif<=3){
+           if(dif<=30){
              return 'orange'
            }
         }

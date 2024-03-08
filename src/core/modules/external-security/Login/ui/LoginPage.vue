@@ -135,8 +135,7 @@
 </script>
 <style lang="scss" scoped>
   .login-page {
-    background-color: $ap-primary-light;
-    background-image: url("~assets/images/logo_short.svg");
+    background-color: #DFFFFC;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;

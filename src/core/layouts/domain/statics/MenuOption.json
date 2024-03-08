@@ -75,6 +75,16 @@
               "routeName": "DoesNotHave"
             }
           ]
+        },
+        {
+          "icon": "lab la-product-hunt",
+          "label": "Materia Prima Producida",
+          "routeName": "NomMPProducida",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
         }
       ]
     }

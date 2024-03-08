@@ -77,36 +77,36 @@
                 </div>
                 <div>
                    <div class="row">
-                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
+                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-select dense outlined v-model="nomencladorAdquirida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>
-                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
+                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-input dense outlined label="Código *" v-model="codigo" ></q-input>
                      </div>
-                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-                       <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" ></q-input>
-                     </div>
-                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-                       <q-input dense outlined label="Lote *" v-model="lote" ></q-input>
-                     </div>
-                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-                       <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" ></q-input>
-                     </div>
-                     <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
-                       <q-input dense outlined v-model="dateVencimiento"  label="Fecha de Vencimiento" >
-                         <template v-slot:append>
-                           <q-icon name="event" class="cursor-pointer">
-                             <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                               <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY">
-                                 <div class="row items-center justify-end">
-                                   <q-btn v-close-popup label="Close" color="ap-primary" flat />
-                                 </div>
-                               </q-date>
-                             </q-popup-proxy>
-                           </q-icon>
-                         </template>
-                       </q-input>
-                     </div>
+<!--                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" ></q-input>-->
+<!--                     </div>-->
+<!--                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined label="Lote *" v-model="lote" ></q-input>-->
+<!--                     </div>-->
+<!--                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" ></q-input>-->
+<!--                     </div>-->
+<!--                     <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined v-model="dateVencimiento"  label="Fecha de Vencimiento" >-->
+<!--                         <template v-slot:append>-->
+<!--                           <q-icon name="event" class="cursor-pointer">-->
+<!--                             <q-popup-proxy cover transition-show="scale" transition-hide="scale">-->
+<!--                               <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY">-->
+<!--                                 <div class="row items-center justify-end">-->
+<!--                                   <q-btn v-close-popup label="Close" color="ap-primary" flat />-->
+<!--                                 </div>-->
+<!--                               </q-date>-->
+<!--                             </q-popup-proxy>-->
+<!--                           </q-icon>-->
+<!--                         </template>-->
+<!--                       </q-input>-->
+<!--                     </div>-->
                    </div>
                   <div class="q-my-md" align="right">
                     <q-btn outline class="q-mr-sm"  label="Limpiar" @click="clearFilter"></q-btn>

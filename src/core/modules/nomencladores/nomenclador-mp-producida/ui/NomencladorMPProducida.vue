@@ -30,7 +30,7 @@
   import { useLogin } from '../../../../composable/useLogin';
 
   export default {
-    name:'NomMPAdquirida',
+    name:'NomMPProducida',
     data(){
       return{
         userData: useLogin().user,
@@ -61,7 +61,6 @@
             componentProps: {
               // @ts-ignore
               nameMat: 'Materia Prima Adquirida' ,
-              url:'nomenclador/materiaPrimaAdquirida',
               id:0
             }
           }) .onOk(() => {
@@ -78,7 +77,6 @@
               // @ts-ignore
               nameMat: 'Materia Prima Adquirida' ,
               nameNom:name,
-              url:'nomenclador/materiaPrimaAdquirida',
               id:id
             }
           }) .onOk(() => {

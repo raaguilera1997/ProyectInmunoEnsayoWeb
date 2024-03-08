@@ -1,4 +1,5 @@
 import AdquiridasRoutes from "./adquiridas/_routes"
+import ProducidasRoutes from "./producidas/_routes"
 
 export default [
   {
@@ -6,6 +7,7 @@ export default [
     component: () => import("../../components/router/EmptyPageComponent.vue"),
     children: [
       ...AdquiridasRoutes,
+      ...ProducidasRoutes,
     ]
   }
 ]

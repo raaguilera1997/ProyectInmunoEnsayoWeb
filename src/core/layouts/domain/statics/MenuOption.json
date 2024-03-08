@@ -35,6 +35,16 @@
               "routeName": "DoesNotHave"
             }
           ]
+        },
+        {
+          "icon": "lab la-product-hunt",
+          "label": "Producidas",
+          "routeName": "ProducidasPage",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
         }
       ]
     }

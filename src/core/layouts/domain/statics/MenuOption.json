@@ -45,7 +45,17 @@
               "routeName": "DoesNotHave"
             }
           ]
-        },
+        }
+      ]
+    }
+  },
+  {
+    "icon": "las la-bars",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Soluciones Aditivas",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
         {
           "icon": "las la-bars",
           "label": "Soluciones Aditivas",

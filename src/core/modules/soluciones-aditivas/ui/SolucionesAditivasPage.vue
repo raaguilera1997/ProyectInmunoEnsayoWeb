@@ -26,11 +26,11 @@
         </q-td>
       </template>
       <template v-slot:top>
-        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createProducidasPage'})">
+        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createSolucionesAditivasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"
-               @click="this.$router.push({name:'editarProducidasPage',params:{id:selected[0].id}})">
+               @click="this.$router.push({name:'editarSolucionesAditivasPage',params:{id:selected[0].id}})">
           <q-tooltip>Editar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted">
@@ -78,7 +78,7 @@
                 <div>
                    <div class="row">
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
-                       <q-select dense outlined v-model="nomencladorProducida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
+                       <q-select dense outlined v-model="nomenclador" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-input dense outlined label="Código *" v-model="codigo" ></q-input>
@@ -132,11 +132,11 @@
   import {
     API_REST_DELETE_REQUEST,
     API_REST_GET_REQUEST, API_REST_POST_REQUEST
-  } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
+  } from '../../../../infrastructure/adapters/BoRestApiAdapter';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
-  import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
-  import { toUtcDateTime } from '../../../../../infrastructure/services/DateTimeServices';
-  import { useLogin } from '../../../../composable/useLogin';
+  import { notify } from '../../../../infrastructure/services/VisualNotifyService';
+  import { toUtcDateTime } from '../../../../infrastructure/services/DateTimeServices';
+  import { useLogin } from '../../../composable/useLogin';
 
   export default {
     name: 'SolucionesAditivasPage',
@@ -147,7 +147,7 @@
       return {
         userData: useLogin().user,
         search:'',
-        nomencladorProducida: null,
+        nomenclador: null,
         codigo: null,
         registroEntrada: null,
         lote: null,
@@ -157,11 +157,11 @@
         act_filter_advance:false,
         columns: [
           {
-            name: 'nomencladorMateriaPrimaProducida',
+            name: 'NomencladorSolucionAditiva',
             required: true,
             label: 'Nombre',
             align: 'center',
-            field: row => row.nomencladorMateriaPrimaProducida
+            field: row => row.NomencladorSolucionAditiva
           },
           {
             name: 'codigo',
@@ -170,7 +170,6 @@
             align: 'left',
             field: row => row.codigo
           },
-          { name: 'registroEntrada', align: 'center', label: 'Registro de Entrada', field: row => row.registroEntrada },
           { name: 'lote', align: 'center', label: 'Lote', field: row => row.lote },
           { name: 'sizeLote', align: 'center', label: 'Tamaño del lote', field: row => row.sizeLote },
           { name: 'unidadMedida', align: 'center', label: 'Unidad de Medida', field: row => row.unidadMedida },
@@ -190,7 +189,7 @@
           currentPage: 1,
           payload: {
             search:null,
-            nomencladorMateriaPrimaProducidaId: null,
+            nomencladorSolucionAditivaId: null,
             codigo: null,
             registroEntrada: null,
             lote: null,
@@ -215,7 +214,7 @@
             message: 'Cargando..',
             messageColor: 'black'
         });
-        let url='nomenclador/materiaPrimaProducida'
+        let url='nomenclador/solucionAditiva'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.optionsNomenclator=resp.data
         })
@@ -266,7 +265,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url = 'materiaPrimasProducidas/PageData';
+        let url = 'solucionAditiva/PageData';
         API_REST_POST_REQUEST({ endpoint: url, payload: this.pagination_send }).then(resp => {
           this.rows = resp.data.data;
           this.pagination = {
@@ -281,7 +280,7 @@
         });
       },
       applyFilter(){
-        this.pagination_send.payload.nomencladorMateriaPrimaProducidaId=this.nomencladorMateriaPrimaProducidaId?this.nomencladorMateriaPrimaProducidaId.id:null
+        this.pagination_send.payload.nomencladorSolucionAditivaId=this.nomencladorSolucionAditivaId?this.nomencladorSolucionAditivaId.id:null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote
@@ -296,13 +295,13 @@
         this.loadData()
       },
       clearFilter(){
-        this.nomencladorProducida=null
+        this.nomenclador=null
         this.codigo=null
         this.registroEntrada=null
         this.lote=null
         this.sizeLote=null
         this.dateVencimiento=null
-        this.pagination_send.payload.nomencladorMateriaPrimaProducidaId=null
+        this.pagination_send.payload.nomencladorSolucionAditivaId=null
         this.pagination_send.payload.codigo=null
         this.pagination_send.payload.registroEntrada=null
         this.pagination_send.payload.lote=null
@@ -327,7 +326,7 @@
               message: 'Cargando..',
               messageColor: 'black'
             });
-            let url = `materiaPrimasProducidas/${this.selected[0].id}`;
+            let url = `solucionAditiva/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
                 content: 'Materia Prima eliminada correctamente',

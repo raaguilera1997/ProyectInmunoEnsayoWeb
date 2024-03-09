@@ -43,7 +43,7 @@
         </q-card-section>
       </q-card>
       <div class="fixed-bottom-right">
-        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
+        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'ProducidasPage'})" ></q-btn>
         <q-btn class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
       </div>
     </q-form>

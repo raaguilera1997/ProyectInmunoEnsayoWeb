@@ -1,6 +1,6 @@
 import AdquiridasRoutes from "./adquiridas/_routes"
 import ProducidasRoutes from "./producidas/_routes"
-import SolucionesAditivasRoutes from "./soluciones-aditivas/_routes"
+import SolucionesAditivasRoutes from "../soluciones-aditivas/_routes"
 
 export default [
   {

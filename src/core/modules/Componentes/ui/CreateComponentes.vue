@@ -7,14 +7,14 @@
         <q-card-section>
           <div class="row">
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-select dense outlined v-model="nomencladorSolucionAditivaId" option-label="name" option-value="name"
+              <q-select dense outlined v-model="nomencladorComponente" option-label="name" option-value="name"
                         :options="optionsNomenclator" label="Nombre *"
                         :rules="[val => !!val || 'El campo es requerido']"/>
             </div>
-            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Código *" v-model="codigo"
-                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
-            </div>
+<!--            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
+<!--              <q-input dense outlined label="Código *" v-model="codigo"-->
+<!--                       :rules="[val => !!val || 'El campo es requerido']"></q-input>-->
+<!--            </div>-->
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Lote *" v-model="lote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
@@ -23,10 +23,7 @@
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
-            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Unidad de Medida *" v-model="unidadMedida"
-                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
-            </div>
+
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
                        label="Fecha de Vencimiento">
@@ -48,7 +45,7 @@
       </q-card>
       <div class="fixed-bottom-right">
         <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar"
-               @click="this.$router.push({name:'SolucionesAditivasPage'})"></q-btn>
+               @click="this.$router.push({name:'ComponentesPage'})"></q-btn>
         <q-btn class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"></q-btn>
       </div>
     </q-form>
@@ -67,7 +64,7 @@
     name: 'CreateComponentes',
     data() {
       return {
-        nomencladorSolucionAditivaId: '',
+        nomencladorComponente: '',
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
@@ -90,7 +87,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url = 'nomenclador/solucionAditiva';
+        let url = 'nomenclador/componentes';
         API_REST_GET_REQUEST({ endpoint: url }).then(resp => {
           this.optionsNomenclator = resp.data;
         });
@@ -105,27 +102,26 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url = 'solucionAditiva';
+        let url = 'componente';
         let moment = require('moment');
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
-          nomencladorSolucionAditivaId: this.nomencladorSolucionAditivaId.id,
-          codigo: this.codigo,
+          nomencladorComponenteId: this.nomencladorComponente.id,
+          // codigo: this.codigo,
           lote: this.lote,
           sizeLote: this.sizeLote,
-          unidadMedida: this.unidadMedida,
           dateVencimiento: formattedDate
         };
         API_REST_POST_REQUEST({ endpoint: url, payload: object }).then(resp => {
           if (resp.status == 200) {
             notify({
-              content: 'Solución aditiva creada correctamente',
+              content: 'Componente creado correctamente',
               type: 'positive'
             });
             this.$q.loading.hide();
             // this.loadNotification()
-            this.$router.push({ name: 'SolucionesAditivasPage' });
+            this.$router.push({ name: 'ComponentesPage' });
           }
         }).catch(err => {
           notify({

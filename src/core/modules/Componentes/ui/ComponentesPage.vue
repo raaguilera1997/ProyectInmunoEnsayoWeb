@@ -157,11 +157,11 @@
         act_filter_advance:false,
         columns: [
           {
-            name: 'NomencladorSolucionAditiva',
+            name: 'nomencladorComponente',
             required: true,
             label: 'Nombre',
             align: 'center',
-            field: row => row.NomencladorSolucionAditiva
+            field: row => row.nomencladorComponente
           },
           // {
           //   name: 'codigo',
@@ -279,7 +279,7 @@
         });
       },
       applyFilter(){
-        this.pagination_send.payload.nomencladorComponenteId=this.nomencladorComponenteId?this.nomencladorComponenteId.id:null
+        this.pagination_send.payload.nomencladorComponenteId=this.nomenclador?this.nomenclador.id:null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote

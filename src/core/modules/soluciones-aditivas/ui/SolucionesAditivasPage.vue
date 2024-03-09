@@ -309,6 +309,8 @@
         this.pagination_send.payload.dateVencimiento=null
         this.loadData()
       },
+
+
       deleted() {
         this.$q
           .dialog({

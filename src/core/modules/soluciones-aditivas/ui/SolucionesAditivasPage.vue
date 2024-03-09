@@ -329,7 +329,7 @@
             let url = `solucionAditiva/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
-                content: 'Materia Prima eliminada correctamente',
+                content: 'Solución Aditiva eliminada correctamente',
                 type: 'positive'
               });
               this.selected = [];

@@ -70,6 +70,26 @@
     }
   },
   {
+    "icon": "las la-bars",
+    "generalRoute": "dashboard",
+    "children": {
+      "title": "Componentes",
+      "description": "Graphical representation of the main metrics.",
+      "links": [
+        {
+          "icon": "las la-bars",
+          "label": "Componentes",
+          "routeName": "ComponentesPage",
+          "links": [
+            {
+              "routeName": "DoesNotHave"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
     "icon": "las la-users",
     "generalRoute": "dashboard",
     "children": {

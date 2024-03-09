@@ -12,9 +12,9 @@
       @request="request"
 
     >
-      <template v-slot:body-cell-nomencladorMateriaPrimaProducida="props">
+      <template v-slot:body-cell-nomencladorComponente="props">
         <q-td :props="props">
-          {{props.row.nomencladorMateriaPrimaProducida.name}}
+          {{props.row.nomencladorComponente.name}}
         </q-td>
       </template>
       <template v-slot:body-cell-dateVencimiento="props">
@@ -26,11 +26,11 @@
         </q-td>
       </template>
       <template v-slot:top>
-        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createSolucionesAditivasPage'})">
+        <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createComponentesPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"
-               @click="this.$router.push({name:'editarSolucionesAditivasPage',params:{id:selected[0].id}})">
+               @click="this.$router.push({name:'editarComponentesPage',params:{id:selected[0].id}})">
           <q-tooltip>Editar</q-tooltip>
         </q-btn>
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted">
@@ -80,9 +80,9 @@
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-select dense outlined v-model="nomenclador" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>
-                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
-                       <q-input dense outlined label="Código *" v-model="codigo" ></q-input>
-                     </div>
+<!--                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined label="Código *" v-model="codigo" ></q-input>-->
+<!--                     </div>-->
 <!--                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
 <!--                       <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" ></q-input>-->
 <!--                     </div>-->
@@ -163,16 +163,15 @@
             align: 'center',
             field: row => row.NomencladorSolucionAditiva
           },
-          {
-            name: 'codigo',
-            required: true,
-            label: 'Código',
-            align: 'left',
-            field: row => row.codigo
-          },
+          // {
+          //   name: 'codigo',
+          //   required: true,
+          //   label: 'Código',
+          //   align: 'left',
+          //   field: row => row.codigo
+          // },
           { name: 'lote', align: 'center', label: 'Lote', field: row => row.lote },
           { name: 'sizeLote', align: 'center', label: 'Tamaño del lote', field: row => row.sizeLote },
-          { name: 'unidadMedida', align: 'center', label: 'Unidad de Medida', field: row => row.unidadMedida },
           {
             name: 'dateVencimiento',
             align: 'center',
@@ -189,7 +188,7 @@
           currentPage: 1,
           payload: {
             search:null,
-            nomencladorSolucionAditivaId: null,
+            nomencladorComponenteId: null,
             codigo: null,
             registroEntrada: null,
             lote: null,
@@ -214,7 +213,7 @@
             message: 'Cargando..',
             messageColor: 'black'
         });
-        let url='nomenclador/solucionAditiva'
+        let url='nomenclador/componentes'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.optionsNomenclator=resp.data
         })
@@ -265,7 +264,7 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url = 'solucionAditiva/PageData';
+        let url = 'componente/PageData';
         API_REST_POST_REQUEST({ endpoint: url, payload: this.pagination_send }).then(resp => {
           this.rows = resp.data.data;
           this.pagination = {
@@ -280,7 +279,7 @@
         });
       },
       applyFilter(){
-        this.pagination_send.payload.nomencladorSolucionAditivaId=this.nomencladorSolucionAditivaId?this.nomencladorSolucionAditivaId.id:null
+        this.pagination_send.payload.nomencladorComponenteId=this.nomencladorComponenteId?this.nomencladorComponenteId.id:null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote
@@ -301,7 +300,7 @@
         this.lote=null
         this.sizeLote=null
         this.dateVencimiento=null
-        this.pagination_send.payload.nomencladorSolucionAditivaId=null
+        this.pagination_send.payload.nomencladorComponenteId=null
         this.pagination_send.payload.codigo=null
         this.pagination_send.payload.registroEntrada=null
         this.pagination_send.payload.lote=null
@@ -326,10 +325,10 @@
               message: 'Cargando..',
               messageColor: 'black'
             });
-            let url = `solucionAditiva/${this.selected[0].id}`;
+            let url = `componente/${this.selected[0].id}`;
             API_REST_DELETE_REQUEST({ endpoint: url, payload: {} }).then(resp => {
               notify({
-                content: 'Materia Prima eliminada correctamente',
+                content: 'Componente eliminado correctamente',
                 type: 'positive'
               });
               this.selected = [];

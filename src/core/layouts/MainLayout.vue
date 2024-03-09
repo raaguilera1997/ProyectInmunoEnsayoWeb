@@ -243,7 +243,7 @@ export default defineComponent({
 }
 
 .slide-fade-leave-active {
-  transition: all 1.2s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .slide-fade-enter-from,

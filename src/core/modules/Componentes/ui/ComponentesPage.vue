@@ -12,9 +12,9 @@
       @request="request"
 
     >
-      <template v-slot:body-cell-nomencladorSolucionAditiva="props">
+      <template v-slot:body-cell-nomencladorMateriaPrimaProducida="props">
         <q-td :props="props">
-          {{props.row.nomencladorSolucionAditiva.name}}
+          {{props.row.nomencladorMateriaPrimaProducida.name}}
         </q-td>
       </template>
       <template v-slot:body-cell-dateVencimiento="props">
@@ -139,7 +139,7 @@
   import { useLogin } from '../../../composable/useLogin';
 
   export default {
-    name: 'SolucionesAditivasPage',
+    name: 'ComponentesPage',
     components: {
       PaginationComponent
     },
@@ -157,11 +157,11 @@
         act_filter_advance:false,
         columns: [
           {
-            name: 'nomencladorSolucionAditiva',
+            name: 'NomencladorSolucionAditiva',
             required: true,
             label: 'Nombre',
             align: 'center',
-            field: row => row.nomencladorSolucionAditiva
+            field: row => row.NomencladorSolucionAditiva
           },
           {
             name: 'codigo',

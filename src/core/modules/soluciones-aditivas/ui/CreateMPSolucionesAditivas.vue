@@ -7,12 +7,12 @@
         <q-card-section>
           <div class="row">
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-select dense outlined v-model="nomencladorSolucionAditivaId" option-label="name" option-value="name"
+              <q-select @update:model-value="UpdateNom" dense outlined v-model="nomencladorSolucionAditivaId" option-label="name" option-value="name"
                         :options="optionsNomenclator" label="Nombre *"
                         :rules="[val => !!val || 'El campo es requerido']"/>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Código *" v-model="codigo"
+              <q-input readonly dense outlined label="Código *" v-model="codigo"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
@@ -81,6 +81,9 @@
       this.loadNomenclador();
     },
     methods: {
+      UpdateNom(value){
+        this.codigo=value.codigo
+      },
       loadNomenclador() {
         this.$q.loading.show({
           spinner: QSpinnerFacebook,

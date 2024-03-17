@@ -36,6 +36,22 @@
                 </template>
               </q-input>
             </div>
+            <div class="col-12 row">
+              <q-checkbox v-model="extension" label="Extensión de Vencimiento " />
+              <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+                <template v-slot:append>
+                  <q-icon name="event" class="cursor-pointer">
+                    <q-popup-proxy cover transition-show="scale" transition-hide="scale">
+                      <q-date  color="ap-primary" v-model="dateExtension"  mask="DD/MM/YYYY">
+                        <div class="row items-center justify-end">
+                          <q-btn v-close-popup label="Close" color="ap-primary" flat />
+                        </div>
+                      </q-date>
+                    </q-popup-proxy>
+                  </q-icon>
+                </template>
+              </q-input>
+            </div>
           </div>
         </q-card-section>
       </q-card>
@@ -64,12 +80,14 @@
     data() {
       return {
         nomencladorAdquirida: '',
+        extension:false,
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
         lote: '',
         sizeLote: 0,
         dateVencimiento: null,
+        dateExtension: null,
 
       };
     },

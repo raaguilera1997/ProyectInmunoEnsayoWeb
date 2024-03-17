@@ -25,6 +25,13 @@
           </q-badge>
         </q-td>
       </template>
+      <template v-slot:body-cell-extension="props">
+        <q-td :props="props">
+         <q-icon class="cursor-pointer" size="sm" color="green" :name="props.row.extension?'las la-check':'las la-times'">
+           <q-tooltip v-if="props.row.extension">{{formatDate(props.row.extension)}}</q-tooltip>
+         </q-icon>
+        </q-td>
+      </template>
       <template v-slot:top>
         <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
@@ -178,6 +185,12 @@
             align: 'center',
             label: 'Fecha de Vencimiento',
             field: row => row.dateVencimiento
+          },
+          {
+            name: 'extension',
+            align: 'center',
+            label: 'Extension',
+            field: row => row.dateVencimiento
           }
 
         ],
@@ -266,14 +279,27 @@
           messageColor: 'black'
         });
         let url = 'materiaPrimasAdquiridas/PageData';
+        let result=[]
         API_REST_POST_REQUEST({ endpoint: url, payload: this.pagination_send }).then(resp => {
-          this.rows = resp.data.data;
+
+          // this.rows = resp.data.data;
+          resp.data.data.map((item,index)=>{
+            let object={
+              ...item,
+              extension:""
+            }
+            if(index==0){
+              object.extension=item.dateVencimiento
+            }
+            result.push(object)
+          });
+          this.rows=result
           this.pagination = {
             page: resp.data.currentPage,
             rowsPerPage: resp.data.rowsPerPage,
             rowsNumber: resp.data.totalItems
           };
-
+           //statico quitar despues
           this.$q.loading.hide();
         }).catch(e => {
           this.$q.loading.hide();

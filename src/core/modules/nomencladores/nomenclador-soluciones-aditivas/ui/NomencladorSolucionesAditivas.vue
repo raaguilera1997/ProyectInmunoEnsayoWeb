@@ -10,7 +10,7 @@
     >
       <template v-slot:top>
         <q-btn v-if="userData.role!='Consultor'" round flat color="primary" icon="las la-plus" @click="addNom" />
-        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"  @click="editNom(selected[0].id,selected[0].name)" />
+        <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"  @click="editNom(selected[0].id,selected[0].name,selected[0].codigo)" />
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted"  />
 
       </template>
@@ -43,6 +43,7 @@
             field: row => row.id,
           },
           { name: 'name', align: 'center', label: 'Nombre', field: row => row.name},
+          { name: 'codigo', align: 'center', label: 'Codigo', field: row => row.codigo},
         ],
         rows: [],
         selected: []
@@ -69,7 +70,7 @@
           this.loadData()
         })
       },
-      editNom(id,name){
+      editNom(id,name,codigo){
         this.$q
           .dialog({
             // @ts-ignore
@@ -78,6 +79,7 @@
               // @ts-ignore
               nameMat: 'Soluciones aditivas' ,
               nameNom:name,
+              codNom:codigo,
               id:id,
               url:'nomenclador/solucionAditiva',
             }

@@ -15,6 +15,10 @@
         type: String,
         required: true
       },
+      codNom: {
+        type: String,
+        required: true
+      },
       nameNom: {
         type: String,
         required: false,
@@ -29,12 +33,14 @@
       const showLoadingSubmitBtn = false;
       return {
         showLoadingSubmitBtn,
-        name: ''
+        name: '',
+        codigo: '',
       };
     },
     mounted() {
       if(this.id!=0){
         this.name=this.nameNom
+        this.codigo=this.codNom
 
       }
     },
@@ -50,11 +56,11 @@
         });
 
         let object = {
-          name: this.name
+          name: this.name,
+          codigo: this.codigo,
         };
         if(this.id==0){
           let urlSend = this.url;
-          console.log("llega",this.url)
           API_REST_POST_REQUEST({ endpoint: urlSend, payload: object }).then(resp => {
             if (resp.status == 200) {
               notify({
@@ -130,6 +136,11 @@
         <div class="q-pa-md row justify-center">
           <div class="col-12">
             <q-input dense outlined label="Nombre *" v-model="name"
+                     :rules="[val => !!val || 'El campo es requerido',
+                     val => val.length > 2 || 'El campo requiere tres caracteres como minimo']"></q-input>
+          </div>
+          <div class="col-12">
+            <q-input dense outlined label="Codigo *" v-model="codigo"
                      :rules="[val => !!val || 'El campo es requerido',
                      val => val.length > 2 || 'El campo requiere tres caracteres como minimo']"></q-input>
           </div>

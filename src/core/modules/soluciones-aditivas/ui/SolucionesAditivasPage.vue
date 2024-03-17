@@ -1,6 +1,5 @@
 <template>
   <div class="q-pa-md">
-
     <q-table
       row-key="id"
       v-model:pagination="pagination"
@@ -309,8 +308,6 @@
         this.pagination_send.payload.dateVencimiento=null
         this.loadData()
       },
-
-
       deleted() {
         this.$q
           .dialog({

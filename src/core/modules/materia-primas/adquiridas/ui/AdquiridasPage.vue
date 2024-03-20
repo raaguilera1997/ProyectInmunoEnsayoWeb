@@ -25,10 +25,10 @@
           </q-badge>
         </q-td>
       </template>
-      <template v-slot:body-cell-extension="props">
+      <template v-slot:body-cell-hasExtension="props">
         <q-td :props="props">
-         <q-icon class="cursor-pointer" size="sm" color="green" :name="props.row.extension?'las la-check':'las la-times'">
-           <q-tooltip v-if="props.row.extension">{{formatDate(props.row.extension)}}</q-tooltip>
+         <q-icon class="cursor-pointer" size="sm" color="green" :name="props.row.hasExtension?'las la-check':'las la-times'">
+           <q-tooltip v-if="props.row.hasExtension">{{formatDate(props.row.dateExtension)}}</q-tooltip>
          </q-icon>
         </q-td>
       </template>
@@ -187,10 +187,10 @@
             field: row => row.dateVencimiento
           },
           {
-            name: 'extension',
+            name: 'hasExtension',
             align: 'center',
             label: 'Extension',
-            field: row => row.dateVencimiento
+            field: row => row.hasExtension
           }
 
         ],

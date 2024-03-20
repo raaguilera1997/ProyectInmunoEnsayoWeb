@@ -26,7 +26,7 @@
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY">
+                      <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY" @update:model-value="compareDate">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Close" color="ap-primary" flat />
                         </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 row">
                 <q-checkbox v-model="extension" label="Extensión de Vencimiento " />
-                <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+                <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Extensión" >
                   <template v-slot:append>
                     <q-icon name="event" class="cursor-pointer">
                       <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -89,6 +89,14 @@
       this.loadNomenclador()
     },
     methods:{
+      compareDate(dateVenc){
+        let newDateVencimiento=new Date(dateVenc)
+        let newDateAct=new Date()
+        console.log(newDateVencimiento,newDateAct)
+        if(newDateAct>newDateVencimiento){
+            console.log("llega")
+        }
+      },
       UpdateNom(value){
         this.codigo=value.codigo
       },
@@ -121,15 +129,18 @@
         })
         let url = 'materiaPrimasAdquiridas'
         let moment = require('moment');
-        let date = this.dateVencimiento;
-        let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
+
+        let formattedDateVenc = moment(this.dateVencimiento, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
+        let formattedDateExt = moment(this.dateExtension, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
           nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
            codigo:this.codigo,
            registroEntrada:this.registroEntrada,
            lote:this.lote,
            sizeLote:this.sizeLote,
-           dateVencimiento:formattedDate
+           dateVencimiento:formattedDateVenc,
+           hasExtension:this.extension,
+           dateExtension:formattedDateExt
         }
            API_REST_POST_REQUEST({ endpoint: url, payload: object }).then(resp => {
             if (resp.status == 200) {

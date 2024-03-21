@@ -7,28 +7,36 @@
         <q-card-section>
           <div class="row">
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-select  @update:model-value="UpdateNom" dense outlined v-model="nomencladorAdquirida" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *" :rules="[val => !!val || 'El campo es requerido']" />
+              <q-select @update:model-value="UpdateNom" dense outlined v-model="nomencladorAdquirida"
+                        option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"
+                        :rules="[val => !!val || 'El campo es requerido']"/>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input readonly dense outlined label="Código *" v-model="codigo" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-input readonly dense outlined label="Código *" v-model="codigo"
+                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada"
+                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Lote *" v-model="lote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-input dense outlined label="Lote *" v-model="lote"
+                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
+                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
-            <div class="col-md-4 col-lg-4 q-px-sm q-py-sm" >
-              <q-input  dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+            <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
+              <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
+                       label="Fecha de Vencimiento">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY" @update:model-value="compareDate">
+                      <q-date color="ap-primary" v-model="dateVencimiento" mask="DD/MM/YYYY"
+                              @update:model-value="compareDate">
                         <div class="row items-center justify-end">
-                          <q-btn v-close-popup label="Close" color="ap-primary" flat />
+                          <q-btn v-close-popup label="Close" color="ap-primary" flat/>
                         </div>
                       </q-date>
                     </q-popup-proxy>
@@ -37,14 +45,15 @@
               </q-input>
             </div>
             <div v-if="showExtencion" class="col-12 row">
-              <q-checkbox v-model="extension" label="Extensión de Vencimiento " />
-              <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+              <q-checkbox v-model="extension" label="Extensión de Vencimiento "/>
+              <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension"
+                       :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date  color="ap-primary" v-model="dateExtension"  mask="DD/MM/YYYY">
+                      <q-date color="ap-primary" v-model="dateExtension" mask="DD/MM/YYYY">
                         <div class="row items-center justify-end">
-                          <q-btn v-close-popup label="Close" color="ap-primary" flat />
+                          <q-btn v-close-popup label="Close" color="ap-primary" flat/>
                         </div>
                       </q-date>
                     </q-popup-proxy>
@@ -56,8 +65,10 @@
         </q-card-section>
       </q-card>
       <div class="fixed-bottom-right">
-        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
-        <q-btn :disable="extension&&dateExtension?false:true" class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
+        <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar"
+               @click="this.$router.push({name:'AdquiridasPage'})"></q-btn>
+        <q-btn :disable="extension&&dateExtension?false:!extension?false:true" class="q-ma-lg" label="Aceptar" type="submit"
+               color="ap-primary"></q-btn>
       </div>
     </q-form>
   </q-page>
@@ -79,70 +90,51 @@
     name: 'CreateMPAdquiridas',
     data() {
       return {
-        showExtencion:false,
+        showExtencion: false,
         nomencladorAdquirida: '',
-        extension:false,
+        extension: false,
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
         lote: '',
         sizeLote: 0,
         dateVencimiento: null,
-        dateExtension: null,
+        dateExtension: ''
 
       };
     },
-    mounted(){
-      this.getInfo()
-      this.loadNomenclador()
+    mounted() {
+      this.getInfo();
+      this.loadNomenclador();
     },
-    methods:{
-      compareDate(dateVenc){
+    methods: {
+      compareDate(dateVenc) {
         var fechaActual = new Date();
         var fechaCompararStr = dateVenc;
-        var partesFechaComparar = fechaCompararStr.split("/");
+        var partesFechaComparar = fechaCompararStr.split('/');
         var dia = parseInt(partesFechaComparar[0], 10);
         var mes = parseInt(partesFechaComparar[1], 10) - 1;
         var anio = parseInt(partesFechaComparar[2], 10);
         var fechaComparar = new Date(anio, mes, dia);
         if (fechaActual >= fechaComparar) {
-          this.showExtencion=true
-        }
-        else {
-          this.showExtencion=false
+          this.showExtencion = true;
+        } else {
+          this.showExtencion = false;
+          this.extension = false;
+          this.dateExtension = null;
         }
       },
-      UpdateNom(value){
-        this.codigo=value.codigo
+      UpdateNom(value) {
+        this.codigo = value.codigo;
       },
       formatDate(date) {
         var moment = require('moment');
         var dateString = date;
-        var date = moment.utc(dateString).local();
+        var date = moment.utc(dateString);
         return date.format('DD/MM/YYYY');
       },
-      getInfo(){
-        let url=`materiaPrimasAdquiridas/${this.$route.params.id}`
-        this.$q.loading.show({
-          spinner: QSpinnerFacebook,
-          spinnerColor: 'primary',
-          spinnerSize: 140,
-          backgroundColor: 'white',
-          message: 'Cargando..',
-          messageColor: 'black'
-        })
-        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-         this.nomencladorAdquirida=resp.data.nomencladorMateriaPrimaAdquirida
-         this.codigo=resp.data.codigo
-         this.registroEntrada=resp.data.registroEntrada
-         this.lote=resp.data.lote
-         this.sizeLote=resp.data.sizeLote
-         this.dateVencimiento=this.formatDate(resp.data.dateVencimiento)
-        })
-        this.$q.loading.hide()
-
-      },
-      loadNomenclador(){
+      getInfo() {
+        let url = `materiaPrimasAdquiridas/${this.$route.params.id}`;
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
           spinnerColor: 'primary',
@@ -151,11 +143,33 @@
           message: 'Cargando..',
           messageColor: 'black'
         });
-        let url='nomenclador/materiaPrimaAdquirida'
-        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-          this.optionsNomenclator=resp.data
-        })
-        this.$q.loading.hide()
+        API_REST_GET_REQUEST({ endpoint: url }).then(resp => {
+          this.nomencladorAdquirida = resp.data.nomencladorMateriaPrimaAdquirida;
+          this.codigo = resp.data.codigo;
+          this.registroEntrada = resp.data.registroEntrada;
+          this.lote = resp.data.lote;
+          this.sizeLote = resp.data.sizeLote;
+          this.dateVencimiento = this.formatDate(resp.data.dateVencimiento);
+          this.extension = resp.data.hasExtension;
+          this.showExtencion = resp.data.hasExtension;
+          this.dateExtension = resp.data.dateExtension?this.formatDate(resp.data.dateExtension):null;
+        });
+        this.$q.loading.hide();
+      },
+      loadNomenclador() {
+        this.$q.loading.show({
+          spinner: QSpinnerFacebook,
+          spinnerColor: 'primary',
+          spinnerSize: 140,
+          backgroundColor: 'white',
+          message: 'Cargando..',
+          messageColor: 'black'
+        });
+        let url = 'nomenclador/materiaPrimaAdquirida';
+        API_REST_GET_REQUEST({ endpoint: url }).then(resp => {
+          this.optionsNomenclator = resp.data;
+        });
+        this.$q.loading.hide();
       },
       Save() {
         this.$q.loading.show({
@@ -165,40 +179,43 @@
           backgroundColor: 'white',
           message: 'Cargando..',
           messageColor: 'black'
-        })
-        let url = `materiaPrimasAdquiridas/${this.$route.params.id}`
+        });
+        let url = `materiaPrimasAdquiridas/${this.$route.params.id}`;
         let moment = require('moment');
         let date = this.dateVencimiento;
         let formattedDate = moment(date, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
+        let formattedDateExt = moment(this.dateExtension, 'DD/MM/YYYY').format('YYYY-MM-DDTHH:mm:ss.SSS') + 'Z';
         let object = {
-           nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
-           codigo:this.codigo,
-           registroEntrada:this.registroEntrada,
-           lote:this.lote,
-           sizeLote:this.sizeLote,
-           dateVencimiento:formattedDate
-        }
-           API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {
-            if (resp.status == 200) {
-              notify({
-                content: 'materia prima  editada correctamente',
-                type: 'positive'
-              })
-              this.$q.loading.hide()
-              this.loadNotification()
-              this.$router.push({ name: 'AdquiridasPage' })
-            }
-          }).catch(err => {
+          nomencladorMateriaPrimaAdquiridaId: this.nomencladorAdquirida.id,
+          codigo: this.codigo,
+          registroEntrada: this.registroEntrada,
+          lote: this.lote,
+          sizeLote: this.sizeLote,
+          dateVencimiento: formattedDate,
+          hasExtension:this.extension,
+          dateExtension:this.dateExtension?formattedDateExt:null
+        };
+        API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {
+          if (resp.status == 200) {
             notify({
-              content: err.response.data,
-              type: 'negative'
-            })
-            this.$q.loading.hide()
-          })
-        },
-      loadNotification(){
-        let result=[]
-        let url=`notificationMateriaPrimaAdquirida`
+              content: 'materia prima  editada correctamente',
+              type: 'positive'
+            });
+            this.$q.loading.hide();
+            this.loadNotification();
+            this.$router.push({ name: 'AdquiridasPage' });
+          }
+        }).catch(err => {
+          notify({
+            content: err.response.data,
+            type: 'negative'
+          });
+          this.$q.loading.hide();
+        });
+      },
+      loadNotification() {
+        let result = [];
+        let url = `notificationMateriaPrimaAdquirida`;
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
           spinnerColor: 'primary',
@@ -206,22 +223,22 @@
           backgroundColor: 'white',
           message: 'Cargando..',
           messageColor: 'black'
-        })
-        API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
-          resp.data.result.map((item)=>{
-            let object={
+        });
+        API_REST_GET_REQUEST({ endpoint: url }).then(resp => {
+          resp.data.result.map((item) => {
+            let object = {
               ...item,
-              type:'MPA',
-              leido:false
+              type: 'MPA',
+              leido: false
 
-            }
-            result.push(object)
-          })
-          useNotification().setListMpaAdquirida(result)
-        })
-        this.$q.loading.hide()
-      },
+            };
+            result.push(object);
+          });
+          useNotification().setListMpaAdquirida(result);
+        });
+        this.$q.loading.hide();
       }
+    }
 
   };
 </script>

@@ -57,7 +57,7 @@
       </q-card>
       <div class="fixed-bottom-right">
         <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
-        <q-btn :disable="extension&&dateExtension?false:true" class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
+        <q-btn :disable="extension&&dateExtension?false:!extension?false:true" class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
       </div>
     </q-form>
   </q-page>
@@ -108,9 +108,7 @@
       UpdateNom(value){
         this.codigo=value.codigo
       },
-      compDate(){
-        let date=new Date()
-      },
+
       loadNomenclador(){
         this.$q.loading.show({
           spinner: QSpinnerFacebook,
@@ -148,7 +146,7 @@
            sizeLote:this.sizeLote,
            dateVencimiento:formattedDateVenc,
            hasExtension:this.extension,
-           dateExtension:formattedDateExt
+           dateExtension:this.dateExtension?formattedDateExt:null
         }
            API_REST_POST_REQUEST({ endpoint: url, payload: object }).then(resp => {
             if (resp.status == 200) {

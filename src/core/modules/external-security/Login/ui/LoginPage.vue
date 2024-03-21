@@ -94,7 +94,7 @@
     const showLoadingSubmitBtn = false;
     return {
       meta: {
-        title: 'Login',
+        title: 'Autenticar',
         titleTemplate: (title: string) => `${title}`,
       },
       formModel,

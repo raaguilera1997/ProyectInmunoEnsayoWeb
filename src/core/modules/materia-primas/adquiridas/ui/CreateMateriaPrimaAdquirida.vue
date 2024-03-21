@@ -36,8 +36,8 @@
                 </template>
               </q-input>
             </div>
-            <div class="col-12 row">
-                <q-checkbox v-model="extension" label="Extensión de Vencimiento " />
+            <div class="col-12 row" v-if="showExtencion">
+                <q-checkbox  v-model="extension" label="Extensión de Vencimiento " />
                 <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Extensión" >
                   <template v-slot:append>
                     <q-icon name="event" class="cursor-pointer">
@@ -57,7 +57,7 @@
       </q-card>
       <div class="fixed-bottom-right">
         <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
-        <q-btn class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
+        <q-btn :disable="extension&&dateExtension?false:true" class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
       </div>
     </q-form>
   </q-page>
@@ -73,6 +73,7 @@
     name: 'CreateMPAdquiridas',
     data() {
       return {
+        showExtencion:false,
         extension:false,
         nomencladorAdquirida: '',
         optionsNomenclator: [],
@@ -90,11 +91,18 @@
     },
     methods:{
       compareDate(dateVenc){
-        let newDateVencimiento=new Date(dateVenc)
-        let newDateAct=new Date()
-        console.log(newDateVencimiento,newDateAct)
-        if(newDateAct>newDateVencimiento){
-            console.log("llega")
+        var fechaActual = new Date();
+        var fechaCompararStr = dateVenc;
+        var partesFechaComparar = fechaCompararStr.split("/");
+        var dia = parseInt(partesFechaComparar[0], 10);
+        var mes = parseInt(partesFechaComparar[1], 10) - 1;
+        var anio = parseInt(partesFechaComparar[2], 10);
+        var fechaComparar = new Date(anio, mes, dia);
+        if (fechaActual >= fechaComparar) {
+          this.showExtencion=true
+        }
+        else {
+         this.showExtencion=false
         }
       },
       UpdateNom(value){

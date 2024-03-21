@@ -189,7 +189,7 @@
           {
             name: 'hasExtension',
             align: 'center',
-            label: 'Extension',
+            label: 'Extensión',
             field: row => row.hasExtension
           }
 

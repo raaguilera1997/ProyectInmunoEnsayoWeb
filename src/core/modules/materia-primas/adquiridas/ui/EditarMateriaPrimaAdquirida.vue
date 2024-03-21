@@ -21,12 +21,12 @@
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
-            <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
-              <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+            <div class="col-md-4 col-lg-4 q-px-sm q-py-sm" >
+              <q-input  dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
-                      <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY">
+                      <q-date  color="ap-primary" v-model="dateVencimiento"  mask="DD/MM/YYYY" @update:model-value="compareDate">
                         <div class="row items-center justify-end">
                           <q-btn v-close-popup label="Close" color="ap-primary" flat />
                         </div>
@@ -36,7 +36,7 @@
                 </template>
               </q-input>
             </div>
-            <div class="col-12 row">
+            <div v-if="showExtencion" class="col-12 row">
               <q-checkbox v-model="extension" label="Extensión de Vencimiento " />
               <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
                 <template v-slot:append>
@@ -57,7 +57,7 @@
       </q-card>
       <div class="fixed-bottom-right">
         <q-btn outline class="q-mt-lg q-mb-lg" label="Cancelar" @click="this.$router.push({name:'AdquiridasPage'})" ></q-btn>
-        <q-btn class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
+        <q-btn :disable="extension&&dateExtension?false:true" class="q-ma-lg" label="Aceptar" type="submit" color="ap-primary"   ></q-btn>
       </div>
     </q-form>
   </q-page>
@@ -79,6 +79,7 @@
     name: 'CreateMPAdquiridas',
     data() {
       return {
+        showExtencion:false,
         nomencladorAdquirida: '',
         extension:false,
         optionsNomenclator: [],
@@ -96,6 +97,21 @@
       this.loadNomenclador()
     },
     methods:{
+      compareDate(dateVenc){
+        var fechaActual = new Date();
+        var fechaCompararStr = dateVenc;
+        var partesFechaComparar = fechaCompararStr.split("/");
+        var dia = parseInt(partesFechaComparar[0], 10);
+        var mes = parseInt(partesFechaComparar[1], 10) - 1;
+        var anio = parseInt(partesFechaComparar[2], 10);
+        var fechaComparar = new Date(anio, mes, dia);
+        if (fechaActual >= fechaComparar) {
+          this.showExtencion=true
+        }
+        else {
+          this.showExtencion=false
+        }
+      },
       UpdateNom(value){
         this.codigo=value.codigo
       },

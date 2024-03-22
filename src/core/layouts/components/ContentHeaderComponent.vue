@@ -1,6 +1,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useNotification } from 'src/core/composable/useNotification';
+//@ts-ignore
+import ResetPasswordDialog from "src/core/modules/usuarios/usuario/ui/dialog/ResetPasswordDialog.vue";
 export default defineComponent({
   name: 'ContentHeader',
   // components: { IconComponent },
@@ -49,6 +51,20 @@ export default defineComponent({
     };
   },
   methods: {
+    resetPassword(){
+      this.$q
+        .dialog({
+          // @ts-ignore
+          component: ResetPasswordDialog,
+          componentProps: {
+            //@ts-ignore
+            id:this.userData.id,
+            //@ts-ignore
+            userName:this.userData.userName
+
+          }
+        })
+    },
     changePassword() {
       this.$q.dialog({
         //@ts-ignore
@@ -168,24 +184,12 @@ export default defineComponent({
                 </q-item-label>
               </q-item-section>
             </q-item>
-<!--            <q-item clickable v-close-popup class="q-my-sm" @click="changePassword()">-->
-<!--              <q-item-section avatar>-->
-<!--                <q-icon template name="las la-key"></q-icon>-->
-<!--              </q-item-section>-->
-<!--              <q-item-section>Change Password</q-item-section>-->
-<!--            </q-item>-->
-<!--            <q-item-->
-<!--              clickable-->
-<!--              v-close-popup-->
-<!--              class="q-my-sm"-->
-<!--              :to="{ name: 'SettingAccountPage' }"-->
-<!--            >-->
-<!--              <q-item-section avatar>-->
-<!--                <icon-component template name="las la-cog"></icon-component>-->
-<!--              </q-item-section>-->
-<!--              <q-item-section>Setting</q-item-section>-->
-<!--            </q-item>-->
-
+            <q-item clickable v-close-popup class="q-my-sm" @click="resetPassword()">
+              <q-item-section avatar>
+                <q-icon  name="las la-key"></q-icon>
+              </q-item-section>
+              <q-item-section>Cambiar Contraseña</q-item-section>
+            </q-item>
             <q-item clickable v-close-popup class="q-my-sm" @click="$emit('logout')">
               <q-item-section avatar>
                 <q-icon template name="las la-sign-out-alt"></q-icon>

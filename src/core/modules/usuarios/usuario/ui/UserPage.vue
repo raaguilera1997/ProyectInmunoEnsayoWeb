@@ -11,6 +11,7 @@
       <template v-slot:top>
         <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createUserPage'})" />
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editUserPage',params:{id:selected[0].id}})"  />
+        <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-lock" @click="resetPassword"  />
         <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted"  />
 
       </template>
@@ -26,6 +27,7 @@
   } from '../../../../../infrastructure/adapters/BoRestApiAdapter';
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
+  import ResetPasswordDialog from "./dialog/ResetPasswordDialog";
 
   export default {
     name:'UserPage',
@@ -98,7 +100,21 @@
               this.$q.loading.hide()
             })
           })
-      }
+      },
+      resetPassword(){
+        this.$q
+          .dialog({
+            // @ts-ignore
+            component: ResetPasswordDialog,
+            componentProps: {
+              id:this.selected[0].id,
+              userName:this.selected[0].userName
+
+            }
+          }) .onOk(() => {
+          this.selected=[]
+        })
+      },
     }
   }
 </script>

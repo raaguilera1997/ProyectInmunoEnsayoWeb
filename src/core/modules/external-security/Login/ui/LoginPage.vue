@@ -136,6 +136,7 @@
 <style lang="scss" scoped>
   .login-page {
     background-color: #DFFFFC;
+    background-image: url("~assets/images/logo_short.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;

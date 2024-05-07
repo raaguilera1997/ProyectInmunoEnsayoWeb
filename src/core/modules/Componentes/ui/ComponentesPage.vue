@@ -10,7 +10,6 @@
       selection="single"
       v-model:selected="selected"
       @request="request"
-
     >
       <template v-slot:body-cell-nomencladorComponente="props">
         <q-td :props="props">
@@ -119,7 +118,7 @@
         </div>
       </template>
       <template v-slot:bottom>
-        <PaginationComponent @request="request" :rows_per_page_options="[10, 20,30]"
+        <PaginationComponent @request="request" :rows_per_page_options="[10]"
                              :pagination="pagination"></PaginationComponent>
       </template>
     </q-table>

@@ -118,7 +118,7 @@
         </div>
       </template>
       <template v-slot:bottom>
-        <PaginationComponent @request="request" :rows_per_page_options="[10, 20,30]"
+        <PaginationComponent @request="request" :rows_per_page_options="[10]"
                              :pagination="pagination"></PaginationComponent>
       </template>
     </q-table>

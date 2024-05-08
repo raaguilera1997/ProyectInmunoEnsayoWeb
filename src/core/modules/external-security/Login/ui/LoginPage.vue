@@ -135,10 +135,11 @@
 </script>
 <style lang="scss" scoped>
   .login-page {
-    background-color: #DFFFFC;
-    /*background-image: url("~assets/images/logo_short.svg");*/
+    background-color: white;
+    background-image: url("~assets/images/logo_solo.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
+    right: 123px;
   }
 </style>

@@ -13,8 +13,8 @@
 
 <style lang="scss" scoped>
   .login-page {
-    background-color: #DFFFFC;
-    background-image: url("~assets/images/logo_large.svg");
+    background-color: #EEFFFE;
+    background-image: url("~assets/images/logo.svg");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

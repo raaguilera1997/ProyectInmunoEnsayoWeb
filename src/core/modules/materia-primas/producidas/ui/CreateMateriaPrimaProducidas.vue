@@ -13,16 +13,13 @@
               <q-input readonly dense outlined label="Código *" v-model="codigo" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" :rules="[val => !!val || 'El campo es requerido']"></q-input>
-            </div>
-            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Lote *" v-model="lote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Unidad de Medida *" v-model="unidadMedida" :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-select   dense outlined v-model="unidadMedida" option-label="name" option-value="name" :options="optionsUnidadMedida" label="Unidad de Medida *" :rules="[val => !!val || 'El campo es requerido']" />
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
@@ -65,8 +62,8 @@
         nomencladorMateriaPrimaProducidaId: '',
         optionsNomenclator: [],
         codigo: '',
-        registroEntrada: '',
         unidadMedida: '',
+        optionsUnidadMedida: ['L','ML','MG'],
         lote: '',
         sizeLote: 0,
         dateVencimiento: null,
@@ -110,7 +107,6 @@
         let object = {
           nomencladorMateriaPrimaProducidaId: this.nomencladorMateriaPrimaProducidaId.id,
            codigo:this.codigo,
-           registroEntrada:this.registroEntrada,
            lote:this.lote,
            sizeLote:this.sizeLote,
            unidadMedida:this.unidadMedida,

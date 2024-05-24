@@ -170,7 +170,7 @@
             align: 'left',
             field: row => row.codigo
           },
-          { name: 'registroEntrada', align: 'center', label: 'Registro de Entrada', field: row => row.registroEntrada },
+          // { name: 'registroEntrada', align: 'center', label: 'Registro de Entrada', field: row => row.registroEntrada },
           { name: 'lote', align: 'center', label: 'Lote', field: row => row.lote },
           { name: 'sizeLote', align: 'center', label: 'Tamaño del lote', field: row => row.sizeLote },
           { name: 'unidadMedida', align: 'center', label: 'Unidad de Medida', field: row => row.unidadMedida },

@@ -68,6 +68,7 @@
     data() {
       return {
         nomencladorComponente: '',
+        optionsUnidadMedida: ['L','ML','MG'],
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',

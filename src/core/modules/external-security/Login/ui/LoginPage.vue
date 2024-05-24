@@ -55,7 +55,7 @@
           </q-card-section>
           <q-card-actions align="center">
             <q-btn class="full-width q-mb-lg"  type="submit" color="ap-primary"
-                   label="Login">
+                   label="Autenticar">
               <div class="q-mx-sm" v-if="showLoadingSubmitBtn">
                 <q-spinner  color="white" size=".5em"></q-spinner>
               </div>

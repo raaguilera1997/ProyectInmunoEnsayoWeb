@@ -7,6 +7,9 @@
       :columns="columns"
       selection="single"
       v-model:selected="selected"
+      hide-pagination
+      virtual-scroll
+     :rows-per-page-options="[0]"
     >
       <template v-slot:top>
         <q-btn v-if="userData.role!='Consultor'" round flat color="primary" icon="las la-plus" @click="addNom" />

@@ -24,8 +24,7 @@
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Unidad de Medida *" v-model="unidadMedida"
-                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-select   dense outlined v-model="unidadMedida" option-label="name" option-value="name" :options="optionsUnidadMedida" label="Unidad de Medida *" :rules="[val => !!val || 'El campo es requerido']" />
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
@@ -73,6 +72,7 @@
       return {
         nomencladorSolucionAditiva: '',
         optionsNomenclator: [],
+        optionsUnidadMedida: ['L','ML'],
         codigo: '',
         registroEntrada: '',
         unidadMedida: '',

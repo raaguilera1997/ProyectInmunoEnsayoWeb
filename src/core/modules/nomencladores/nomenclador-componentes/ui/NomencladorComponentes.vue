@@ -31,7 +31,6 @@
   import QSpinnerFacebook from 'quasar/src/components/spinner/QSpinnerFacebook';
   import { notify } from '../../../../../infrastructure/services/VisualNotifyService';
   import { useLogin } from '../../../../composable/useLogin';
-
   export default {
     name:'NomComponentes',
     data(){

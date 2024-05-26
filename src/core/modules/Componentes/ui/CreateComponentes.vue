@@ -12,7 +12,7 @@
                         :rules="[val => !!val || 'El campo es requerido']"/>
             </div>
             <div  class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input readonly dense outlined label="Código *" v-model="codigo"
+              <q-input  dense outlined label="Código *" v-model="codigo"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">

@@ -23,6 +23,10 @@
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
+            <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
+              <q-input readonly  dense outlined label="Unidad de Medida *" v-model="unidadMedida"
+                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
+            </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
                        label="Fecha de Vencimiento">
@@ -72,7 +76,7 @@
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
-        unidadMedida: '',
+        unidadMedida: 'frascos',
         lote: '',
         sizeLote: 0,
         dateVencimiento: null
@@ -146,6 +150,7 @@
           codigo: this.codigo,
           lote: this.lote,
           sizeLote: this.sizeLote,
+          unidadMedida: this.unidadMedida,
           dateVencimiento: formattedDate
         };
         API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {

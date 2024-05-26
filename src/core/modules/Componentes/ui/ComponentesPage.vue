@@ -171,6 +171,7 @@
           },
           { name: 'lote', align: 'center', label: 'Lote', field: row => row.lote },
           { name: 'sizeLote', align: 'center', label: 'Tamaño del lote', field: row => row.sizeLote },
+          { name: 'unidadMedida', align: 'center', label: 'Unidad Medida', field: row => row.unidadMedida },
           {
             name: 'dateVencimiento',
             align: 'center',

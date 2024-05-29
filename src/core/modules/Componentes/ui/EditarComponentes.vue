@@ -28,7 +28,7 @@
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
-              <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
+              <q-input readonly dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
                        label="Fecha de Vencimiento">
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">

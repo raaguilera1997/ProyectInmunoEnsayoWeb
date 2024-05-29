@@ -22,7 +22,7 @@
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote" :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
-              <q-input dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
+              <q-input readonly dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Vencimiento" >
                 <template v-slot:append>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy cover transition-show="scale" transition-hide="scale">
@@ -38,7 +38,7 @@
             </div>
             <div class="col-12 row" v-if="showExtencion">
                 <q-checkbox  v-model="extension" label="Extensión de Vencimiento " />
-                <q-input v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Extensión" >
+                <q-input readonly v-if="extension" class="q-py-sm q-px-sm" dense outlined v-model="dateExtension" :rules="[val => !!val || 'El campo es requerido']" label="Fecha de Extensión" >
                   <template v-slot:append>
                     <q-icon name="event" class="cursor-pointer">
                       <q-popup-proxy cover transition-show="scale" transition-hide="scale">

@@ -15,7 +15,9 @@
         <q-btn v-if="userData.role!='Consultor'" round flat color="primary" icon="las la-plus" @click="addNom" />
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"  @click="editNom(selected[0].id,selected[0].name,selected[0].codigo)" />
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted"  />
-
+      </template>
+      <template v-slot:bottom>
+        {{selected.length>0?`Elemento seleccionado : ${selected[0].name}`:''}}
       </template>
     </q-table>
   </div>

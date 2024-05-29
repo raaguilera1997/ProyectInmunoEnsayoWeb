@@ -79,9 +79,9 @@
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-select dense outlined v-model="nomenclador" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>
-                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
-                       <q-input dense outlined label="Código *" v-model="codigo" ></q-input>
-                     </div>
+<!--                     <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">-->
+<!--                       <q-input dense outlined label="Código *" v-model="codigo" ></q-input>-->
+<!--                     </div>-->
 <!--                     <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">-->
 <!--                       <q-input dense outlined label="Registro de Entrada *" v-model="registroEntrada" ></q-input>-->
 <!--                     </div>-->

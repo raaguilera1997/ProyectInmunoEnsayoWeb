@@ -7,13 +7,18 @@
       :columns="columns"
       selection="single"
       v-model:selected="selected"
+      hide-pagination
+      virtual-scroll
+      :rows-per-page-options="[0]"
     >
       <template v-slot:top>
         <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createUserPage'})" />
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editUserPage',params:{id:selected[0].id}})"  />
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-lock" @click="resetPassword"  />
         <q-btn v-if="selected.length>0" round flat color="red" icon="las la-trash" @click="deleted"  />
-
+      </template>
+      <template v-slot:bottom>
+        {{selected.length>0?`Elemento seleccionado : ${selected[0].name}`:''}}
       </template>
     </q-table>
   </div>

@@ -194,7 +194,7 @@ export default defineComponent({
               <q-item-section avatar>
                 <q-icon template name="las la-sign-out-alt"></q-icon>
               </q-item-section>
-              <q-item-section>Sign out</q-item-section>
+              <q-item-section>Salir</q-item-section>
             </q-item>
           </q-list>
       </q-btn-dropdown>

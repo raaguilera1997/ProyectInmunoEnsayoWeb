@@ -88,7 +88,7 @@
     <q-card class="q-dialog-plugin" style="width: 500px; max-width: 90vw;">
       <q-toolbar class="text-white bg-ap-secondary q-px-md q-py-sm">
         <q-icon  name="las la-lock"></q-icon>
-        <span class="text-body2 text-uppercase q-ml-md text-bold">Change Password ({{userName}})</span>
+        <span class="text-body2 text-uppercase q-ml-md text-bold">Cambiar Contraseña ({{userName}})</span>
         <q-space></q-space>
         <q-btn @click="onCancelClick()" round flat>
           <q-icon  name="las la-times"></q-icon>
@@ -100,10 +100,10 @@
             <div class="col-12">
               <q-input
                 dense outlined
-                :rules="[val => !!val || 'New password is required']"
+                :rules="[val => !!val || 'Nueva Contraseña es requerido']"
                 v-model="newPassword"
                 :type="showNewPassword ? 'text': 'password'"
-                label="New password"
+                label="Nueva Contraseña"
               >
                 <template v-slot:prepend>
                   <icon-component class="q-ml-sm" name="las la-key"></icon-component>
@@ -120,9 +120,9 @@
             <div class="col-12">
               <q-input
                 dense outlined
-                label="Confirm password"
+                label="Confirmar Contraseña"
                 lazy-rules
-                :rules="[val => !!val || 'Confirmed password is required']"
+                :rules="[val => !!val || 'Confirmar contraseña es requerido']"
                 :maxlength="255"
                 v-model="confirmedPassword"
                 :type="showConfirmedPassword ? 'text': 'password'"
@@ -142,8 +142,8 @@
           </div>
         </q-card-section>
         <q-card-actions align="right" class="q-px-lg q-pb-lg q-pt-sm q-gutter-y-sm">
-          <q-btn color="dark" outline label="Cancel" class="q-px-md" @click="onCancelClick()"/>
-          <q-btn :loading="showLoadingSubmitBtn" color="ap-secondary" label="Change" class="q-px-lg" type="submit"/>
+          <q-btn color="dark" outline label="Cancelar" class="q-px-md" @click="onCancelClick()"/>
+          <q-btn :loading="showLoadingSubmitBtn" color="ap-secondary" label="Cambiar" class="q-px-lg" type="submit"/>
         </q-card-actions>
       </q-form>
     </q-card>

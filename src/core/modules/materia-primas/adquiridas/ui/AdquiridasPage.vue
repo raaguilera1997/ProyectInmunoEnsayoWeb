@@ -68,7 +68,7 @@
             ></q-icon>
           </template>
         </q-input>
-        <div class="col-12">
+        <div class="col-12 q-pt-sm">
           <transition>
             <q-card v-if="act_filter_advance">
               <q-card-section>

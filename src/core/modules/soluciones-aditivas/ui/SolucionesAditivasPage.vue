@@ -60,7 +60,7 @@
             ></q-icon>
           </template>
         </q-input>
-        <div class="col-12">
+        <div class="col-12 q-pt-sm">
           <transition>
             <q-card v-if="act_filter_advance">
               <q-card-section>
@@ -71,11 +71,11 @@
                     rounded
                     icon="las la-times"
                     tooltip="Close"
-                    @click="act_filter_advance = false"
+                    @click="act_filter_advance = false;clearFilter()"
                   ></q-btn>
                 </div>
                 <div>
-                   <div class="row">
+                   <div class="row ">
                      <div class="col-md-4 col-lg-3 q-px-sm q-py-sm">
                        <q-select dense outlined v-model="nomenclador" option-label="name" option-value="name" :options="optionsNomenclator" label="Nombre *"  />
                      </div>

@@ -72,7 +72,7 @@
                     rounded
                     icon="las la-times"
                     tooltip="Close"
-                    @click="act_filter_advance = false"
+                    @click="act_filter_advance = false;clearFilter()"
                   ></q-btn>
                 </div>
                 <div>

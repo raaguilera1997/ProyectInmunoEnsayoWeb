@@ -360,6 +360,7 @@
               });
               this.selected = [];
               this.loadData();
+              window.location.reload()
               this.$q.loading.hide();
             });
           });

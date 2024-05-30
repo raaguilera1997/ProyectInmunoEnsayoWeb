@@ -24,7 +24,7 @@
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
+              <q-input @keypress="restrictCharsNumber($event)"  dense outlined label="Tamaño del Lote *" v-model="sizeLote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
@@ -170,6 +170,13 @@
           this.optionsNomenclator = resp.data;
         });
         this.$q.loading.hide();
+      },
+      restrictCharsNumber($event) {
+        if ($event.charCode >= 48 && $event.charCode <= 57) {
+          return true
+        } else {
+          $event.preventDefault();
+        }
       },
       Save() {
         this.$q.loading.show({

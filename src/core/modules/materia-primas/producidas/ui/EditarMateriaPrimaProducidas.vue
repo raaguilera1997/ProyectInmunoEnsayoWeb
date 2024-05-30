@@ -21,7 +21,7 @@
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
-                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
+                       :rules="[val => !!val || 'El campo es requerido']" @keypress="restrictCharsNumber($event)"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
               <q-select dense outlined v-model="unidadMedida" option-label="name" option-value="name"
@@ -74,7 +74,7 @@
       return {
         nomencladorProducida: '',
         optionsNomenclator: [],
-        optionsUnidadMedida: ['L','ML','MG'],
+        optionsUnidadMedida: ['ml','mg'],
         codigo: '',
         registroEntrada: '',
         unidadMedida: '',
@@ -118,6 +118,16 @@
         })
         this.$q.loading.hide()
 
+      },
+      restrictCharsNumber($event) {
+        if ($event.charCode == 46) {
+          return true
+        }
+        if ($event.charCode >= 48 && $event.charCode <= 57) {
+          return true
+        } else {
+          $event.preventDefault();
+        }
       },
       loadNomenclador() {
         this.$q.loading.show({

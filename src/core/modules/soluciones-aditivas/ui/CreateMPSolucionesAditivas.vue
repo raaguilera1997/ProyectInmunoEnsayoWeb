@@ -20,7 +20,7 @@
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
+              <q-input  @keypress="restrictCharsNumber($event)"  dense outlined label="Tamaño del Lote *" v-model="sizeLote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
@@ -83,6 +83,13 @@
     methods: {
       UpdateNom(value){
         this.codigo=value.codigo
+      },
+      restrictCharsNumber($event) {
+        if ($event.charCode >= 48 && $event.charCode <= 57) {
+          return true
+        } else {
+          $event.preventDefault();
+        }
       },
       loadNomenclador() {
         this.$q.loading.show({

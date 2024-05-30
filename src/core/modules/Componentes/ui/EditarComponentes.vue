@@ -20,12 +20,11 @@
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input dense outlined label="Tamaño del Lote *" v-model="sizeLote"
+              <q-input @keypress="restrictCharsNumber($event)"  dense outlined label="Tamaño del Lote *" v-model="sizeLote"
                        :rules="[val => !!val || 'El campo es requerido']"></q-input>
             </div>
             <div class="col-md-4 col-lg-6 q-px-sm q-py-sm">
-              <q-input readonly  dense outlined label="Unidad de Medida *" v-model="unidadMedida"
-                       :rules="[val => !!val || 'El campo es requerido']"></q-input>
+              <q-select   dense outlined v-model="unidadMedida" option-label="name" option-value="name" :options="optionsUnidadMedida" label="Unidad de Medida *" :rules="[val => !!val || 'El campo es requerido']" />
             </div>
             <div class="col-md-4 col-lg-4 q-px-sm q-py-sm">
               <q-input readonly dense outlined v-model="dateVencimiento" :rules="[val => !!val || 'El campo es requerido']"
@@ -72,11 +71,11 @@
     data() {
       return {
         nomencladorComponente: '',
-        optionsUnidadMedida: ['L','ML','MG'],
+        optionsUnidadMedida: ['frascos','placas','tarjetas'],
         optionsNomenclator: [],
         codigo: '',
         registroEntrada: '',
-        unidadMedida: 'frascos',
+        unidadMedida: '',
         lote: '',
         sizeLote: 0,
         dateVencimiento: null
@@ -112,6 +111,7 @@
           this.codigo = resp.data.codigo;
           this.lote = resp.data.lote;
           this.sizeLote = resp.data.sizeLote;
+          this.unidadMedida = resp.data.unidadMedida;
           this.dateVencimiento = this.formatDate(resp.data.dateVencimiento);
         });
         this.$q.loading.hide();
@@ -131,6 +131,13 @@
           this.optionsNomenclator = resp.data;
         });
         this.$q.loading.hide();
+      },
+      restrictCharsNumber($event) {
+        if ($event.charCode >= 48 && $event.charCode <= 57) {
+          return true
+        } else {
+          $event.preventDefault();
+        }
       },
       Save() {
         this.$q.loading.show({

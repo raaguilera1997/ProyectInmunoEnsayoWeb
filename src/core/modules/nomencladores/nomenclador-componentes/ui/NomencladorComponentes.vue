@@ -12,6 +12,7 @@
      :rows-per-page-options="[0]"
     >
       <template v-slot:top>
+        <div class="text-subtitle1 text-bold col-12">Nomenclador Componentes</div>
         <q-btn v-if="userData.role!='Consultor'" round flat color="primary" icon="las la-plus" @click="addNom" />
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="primary" icon="las la-edit"  @click="editNom(selected[0].id,selected[0].name,selected[0].codigo)" />
         <q-btn v-if="selected.length>0 && userData.role!='Consultor'" round flat color="red" icon="las la-trash" @click="deleted"  />

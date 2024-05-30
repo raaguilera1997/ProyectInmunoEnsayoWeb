@@ -25,6 +25,7 @@
         </q-td>
       </template>
       <template v-slot:top>
+        <div class="text-subtitle1 text-bold col-12">Soluciones Aditivas</div>
         <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createSolucionesAditivasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>

@@ -12,6 +12,7 @@
       :rows-per-page-options="[0]"
     >
       <template v-slot:top>
+        <div class="text-subtitle1 text-bold col-12">Usuarios</div>
         <q-btn round flat color="primary" icon="las la-plus" @click="this.$router.push({name:'createUserPage'})" />
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-edit" @click="this.$router.push({name:'editUserPage',params:{id:selected[0].id}})"  />
         <q-btn v-if="selected.length>0" round flat color="primary" icon="las la-lock" @click="resetPassword"  />

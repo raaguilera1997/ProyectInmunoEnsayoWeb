@@ -4,7 +4,7 @@
     <q-table
       row-key="id"
       v-model:pagination="pagination"
-      title="Materias Primas Producidas"
+      title="Treats"
       :rows="rows"
       :columns="columns"
       selection="single"
@@ -25,6 +25,7 @@
         </q-td>
       </template>
       <template v-slot:top>
+        <div class="text-subtitle1 text-bold col-12">Componentes</div>
         <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createComponentesPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>

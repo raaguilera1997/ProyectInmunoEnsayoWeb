@@ -33,6 +33,7 @@
         </q-td>
       </template>
       <template v-slot:top>
+        <div class="text-subtitle1 text-bold col-12">Materias primas Adquiridas</div>
         <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>

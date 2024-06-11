@@ -282,6 +282,7 @@
       },
       applyFilter(){
         this.pagination_send.payload.nomencladorSolucionAditivaId=this.nomenclador?this.nomenclador.id:null
+        this.pagination_send.payload.search=null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote

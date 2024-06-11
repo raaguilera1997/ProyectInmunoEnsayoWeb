@@ -72,7 +72,7 @@
       return {
         nomencladorSolucionAditiva: '',
         optionsNomenclator: [],
-        optionsUnidadMedida: ['L','ML'],
+        optionsUnidadMedida: ['L','mL'],
         codigo: '',
         registroEntrada: '',
         unidadMedida: '',
@@ -100,7 +100,7 @@
       formatDate(date) {
         var moment = require('moment');
         var dateString = date;
-        var date = moment.utc(dateString).local();
+        var date = moment.utc(dateString);
         return date.format('DD/MM/YYYY');
       },
       getInfo() {

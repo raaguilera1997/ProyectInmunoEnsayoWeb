@@ -68,7 +68,7 @@
       return {
         nomencladorSolucionAditivaId: '',
         optionsNomenclator: [],
-        optionsUnidadMedida: ['L','ML'],
+        optionsUnidadMedida: ['L','mL'],
         codigo: '',
         registroEntrada: '',
         unidadMedida: '',

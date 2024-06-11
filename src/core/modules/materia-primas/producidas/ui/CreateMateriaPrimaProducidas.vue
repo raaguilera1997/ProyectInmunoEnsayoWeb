@@ -63,7 +63,7 @@
         optionsNomenclator: [],
         codigo: '',
         unidadMedida: '',
-        optionsUnidadMedida: ['ml','mg'],
+        optionsUnidadMedida: ['mL','mg'],
         lote: '',
         sizeLote: 0,
         dateVencimiento: null,

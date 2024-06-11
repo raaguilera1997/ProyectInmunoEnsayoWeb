@@ -43,11 +43,11 @@
           {
             name: 'name',
             required: true,
-            label: 'Name',
+            label: 'Nombre',
             align: 'left',
             field: row => row.name,
           },
-          { name: 'lastName', align: 'center', label: 'Apellido', field: row => row.lastName},
+          { name: 'lastName', align: 'center', label: 'Apellidos', field: row => row.lastName},
           { name: 'userName', align: 'center', label: 'Usuario', field: row => row.userName},
           { name: 'role', align: 'center', label: 'Rol', field: row => row.role},
 

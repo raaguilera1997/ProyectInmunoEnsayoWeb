@@ -50,7 +50,7 @@
             field: row => row.id,
           },
           { name: 'name', align: 'center', label: 'Nombre', field: row => row.name},
-          { name: 'codigo', align: 'center', label: 'Codigo', field: row => row.codigo},
+          { name: 'codigo', align: 'center', label: 'Código', field: row => row.codigo},
         ],
         rows: [],
         selected: []
@@ -107,6 +107,7 @@
         let url='nomenclador/materiaPrimaAdquirida'
         API_REST_GET_REQUEST({endpoint:url}).then(resp=>{
           this.rows=resp.data
+          this.rows.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
           this.$q.loading.hide()
         })
       },

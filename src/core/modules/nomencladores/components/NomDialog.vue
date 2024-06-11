@@ -140,7 +140,7 @@
                      val => val.length > 2 || 'El campo requiere tres caracteres como minimo']"></q-input>
           </div>
           <div class="col-12">
-            <q-input dense outlined label="Codigo *" v-model="codigo"
+            <q-input dense outlined label="Código *" v-model="codigo"
                      :rules="[val => !!val || 'El campo es requerido',
                      val => val.length > 2 || 'El campo requiere tres caracteres como minimo']"></q-input>
           </div>

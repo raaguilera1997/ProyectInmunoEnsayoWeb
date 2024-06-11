@@ -9,6 +9,7 @@
       selection="single"
       v-model:selected="selected"
       @request="request"
+      no-data-label="Datos no disponibles."
 
     >
       <template v-slot:body-cell-nomencladorMateriaPrimaProducida="props">

@@ -10,6 +10,7 @@
       hide-pagination
       virtual-scroll
       :rows-per-page-options="[0]"
+      no-data-label="Datos no disponibles."
     >
       <template v-slot:top>
         <div class="text-subtitle1 text-bold col-12">Usuarios</div>

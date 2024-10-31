@@ -85,6 +85,9 @@
         this.codigo=value.codigo
       },
       restrictCharsNumber($event) {
+        if ($event.charCode == 46) {
+          return true
+        }
         if ($event.charCode >= 48 && $event.charCode <= 57) {
           return true
         } else {

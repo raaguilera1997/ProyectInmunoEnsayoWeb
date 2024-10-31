@@ -283,6 +283,7 @@
       },
       applyFilter(){
         this.pagination_send.payload.nomencladorMateriaPrimaProducidaId=this.nomencladorProducida?this.nomencladorProducida.id:null
+        this.pagination_send.payload.search=null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote

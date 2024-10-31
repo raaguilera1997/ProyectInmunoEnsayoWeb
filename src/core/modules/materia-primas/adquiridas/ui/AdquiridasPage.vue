@@ -34,7 +34,7 @@
         </q-td>
       </template>
       <template v-slot:top>
-        <div class="text-subtitle1 text-bold col-12">Materias Primas Adquiridas</div>
+        <div class="text-subtitle1 text-bold col-12 q-pa-md">Materias Primas Adquiridas</div>
         <q-btn v-if="userData.role!='Consultor'" round flat  icon="las la-plus" @click="this.$router.push({name:'createAdquiridasPage'})">
           <q-tooltip>Adicionar</q-tooltip>
         </q-btn>
@@ -46,7 +46,7 @@
           <q-tooltip>Eliminar</q-tooltip>
         </q-btn>
         <q-space />
-        <q-btn flat icon="las la-filter" @click="act_filter_advance=!act_filter_advance" :disable="pagination_send.payload.search?true:false" >
+        <q-btn  flat icon="las la-filter" @click="act_filter_advance=!act_filter_advance" :disable="pagination_send.payload.search?true:false" >
           <q-tooltip>Filtros Avanzados</q-tooltip>
         </q-btn>
         <q-input
@@ -309,6 +309,7 @@
       },
       applyFilter(){
         this.pagination_send.payload.nomencladorMateriaPrimaAdquiridaId=this.nomencladorAdquirida?this.nomencladorAdquirida.id:null
+        this.pagination_send.payload.search=null
         this.pagination_send.payload.codigo=this.codigo
         this.pagination_send.payload.registroEntrada=this.registroEntrada
         this.pagination_send.payload.lote=this.lote

@@ -205,7 +205,7 @@
         API_REST_PUT_REQUEST({ endpoint: url, payload: object }).then(resp => {
           if (resp.status == 200) {
             notify({
-              content: 'materia prima  editada correctamente',
+              content: 'Materia Prima Adquirida editada correctamente',
               type: 'positive'
             });
             this.$q.loading.hide();

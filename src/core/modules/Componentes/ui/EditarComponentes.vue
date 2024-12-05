@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md bg-grey-1">
     <q-form @submit="Save" autocomplete="off">
-      <div class="text-subtitle1 text-bold">Editar Soluciones Aditivas</div>
+      <div class="text-subtitle1 text-bold">Editar Componentes</div>
       <q-separator/>
       <q-card flat class=" bg-grey-1">
         <q-card-section>
